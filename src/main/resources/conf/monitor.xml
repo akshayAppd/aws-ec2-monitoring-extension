@@ -1,0 +1,26 @@
+<monitor>
+    <name>AWS EC2 Monitor</name>
+    <type>managed</type>
+    <description>AWS EC2 Monitoring Extension</description>
+    <monitor-configuration></monitor-configuration>
+    <monitor-run-task>
+        <execution-style>periodic</execution-style>
+        <execution-frequency-in-seconds>60</execution-frequency-in-seconds>
+        <name>AWS EC2 Monitor Run task</name>
+        <display-name>AWS EC2 Monitor Run task</display-name>
+        <description>AWS EC2 Monitor Run task</description>
+        <type>java</type>
+        <execution-timeout-in-secs>60</execution-timeout-in-secs>
+        
+		<task-arguments>
+			<argument name="config-file" is-required="true" default-value="monitors/AWSEC2Monitor/conf/config.yaml" />
+			<argument name="region-endpoints-config" is-required="true" default-value="monitors/AWSEC2Monitor/conf/region-endpoints.yaml" />
+		</task-arguments>
+            
+        <java-task>
+            <classpath>aws-ec2-monitoring-extension.jar</classpath>
+            <impl-class>com.appdynamics.extensions.aws.ec2.EC2Monitor</impl-class>
+        </java-task>
+        
+    </monitor-run-task>
+</monitor>
