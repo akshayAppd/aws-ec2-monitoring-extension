@@ -22,7 +22,7 @@ public class EC2Monitor extends SingleNamespaceCloudwatchMonitor<EC2Configuratio
 	private static final Logger LOGGER = Logger.getLogger("com.singularity.extensions.aws.EC2Monitor");
 
 	private static final String DEFAULT_METRIC_PREFIX = String.format("%s%s%s%s", 
-			"Custom Metrics", METRIC_PATH_SEPARATOR, "EC2", METRIC_PATH_SEPARATOR);
+			"Custom Metrics", METRIC_PATH_SEPARATOR, "Amazon EC2", METRIC_PATH_SEPARATOR);
 	
 	public EC2Monitor() {
 		super(EC2Configuration.class);
