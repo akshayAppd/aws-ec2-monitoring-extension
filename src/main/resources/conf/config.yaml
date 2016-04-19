@@ -24,6 +24,10 @@ ec2InstanceNameConfig:
     tagFilterName: "tag-key"
     tagKey: "Name"
 
+#EC2 instance for which you want to get the metrics. This is useful when you want to monitor only 1 instance. Keep this empty if you want to monitor all the available instances.
+#Only 1 instance id is acceptable here as AWS CloudWatch API does not support muliple dimension values for the dimension
+ec2Instance: ""
+
 # Global metrics config for all accounts
 metricsConfig:
 
@@ -36,10 +40,10 @@ metricsConfig:
     # Note: Irrespective of the metric type, value will still be reported as
     # Observed value to the Controller
     metricTypes:
-      - metricName: ""
-        statType: ""
+      - metricName: "CPUUtilization"
+        statType: "ave"
 
-    excludeMetrics: [ ]
+    excludeMetrics: [".*Disk.*"]
 
     metricsTimeRange:
       startTimeInMinsBeforeNow: 5
