@@ -2,9 +2,12 @@ package com.appdynamics.extensions.aws.ec2.providers;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
+import com.appdynamics.extensions.aws.ec2.config.Tag;
 import org.junit.Test;
 
 import com.appdynamics.extensions.aws.config.Account;
@@ -22,14 +25,16 @@ public class EC2InstanceNameProviderITest {
 		
 		Ec2InstanceNameConfig testEc2InstanceNameConfig = getTestEc2InstanceNameConfig();
 		testEc2InstanceNameConfig.setUseNameInMetrics("false");
+
+		List<Tag> tags = getTestTags();
 		
 		CredentialsDecryptionConfig testCredentialsConfig = getTestCredentialsConfig();
 		
 		classUnderTest.initialise(Arrays.asList(testAccount), 
 				testCredentialsConfig, 
 				new ProxyConfig(), 
-				testEc2InstanceNameConfig, 
-				3);
+				testEc2InstanceNameConfig,
+				tags, 3);
 		
 		String testInstanceId = "myTestInstance";
 		
@@ -38,7 +43,9 @@ public class EC2InstanceNameProviderITest {
 		
 		assertEquals(testInstanceId, result);
 	}
-	
+
+
+
 	@Test
 	public void testInstanceNameIsReturnedWhenUseNameInMetricsIsFalse() throws Exception {
 		EC2InstanceNameProvider classUnderTest = EC2InstanceNameProvider.getInstance();
@@ -46,12 +53,13 @@ public class EC2InstanceNameProviderITest {
 		Account testAccount = getTestAccount();
 		Ec2InstanceNameConfig testEc2InstanceNameConfig = getTestEc2InstanceNameConfig();
 		CredentialsDecryptionConfig testCredentialsConfig = getTestCredentialsConfig();
+		List<Tag> tags = getTestTags();
 		
 		classUnderTest.initialise(Arrays.asList(testAccount), 
 				testCredentialsConfig, 
 				new ProxyConfig(), 
-				testEc2InstanceNameConfig, 
-				3);
+				testEc2InstanceNameConfig,
+				tags, 3);
 		
 		String testInstanceId = "i-68792461";
 		
@@ -83,5 +91,12 @@ public class EC2InstanceNameProviderITest {
 		credentialsDecryptionConfig.setEnableDecryption("true");
 		credentialsDecryptionConfig.setDecryptionKey("test");
 		return credentialsDecryptionConfig;
+	}
+
+	private List<Tag> getTestTags() {
+
+		List<Tag> tags = new ArrayList<Tag>();
+
+		return tags;
 	}
 }

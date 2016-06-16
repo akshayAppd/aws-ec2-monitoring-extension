@@ -26,7 +26,12 @@ ec2InstanceNameConfig:
 
 #EC2 instance for which you want to get the metrics. This is useful when you want to monitor only 1 instance. Keep this empty if you want to monitor all the available instances.
 #Only 1 instance id is acceptable here as AWS CloudWatch API does not support muliple dimension values for the dimension
-ec2Instance: ""
+ec2Instance:
+
+#Filter the instances by tag name. tagValue is optional. if tagValue is not provided, we will fetch all the instances with the tagName.
+tags:
+  - name: "Name"
+    value: "CS Sandbox oa"
 
 # Global metrics config for all accounts
 metricsConfig:

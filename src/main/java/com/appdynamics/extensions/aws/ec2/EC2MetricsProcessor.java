@@ -47,7 +47,7 @@ public class EC2MetricsProcessor implements MetricsProcessor {
         this.ec2Instance = ec2Instance;
     }
 
-    public List<Metric> getMetrics(AmazonCloudWatch awsCloudWatch) {
+    public List<Metric> getMetrics(AmazonCloudWatch awsCloudWatch, String accountName) {
 
         List<DimensionFilter> dimensions = new ArrayList<DimensionFilter>();
 
@@ -60,10 +60,12 @@ public class EC2MetricsProcessor implements MetricsProcessor {
 
         dimensions.add(dimensionFilter);
 
+        EC2MetricPredicate metricFilter = new EC2MetricPredicate(accountName);
+
         return MetricsProcessorHelper.getFilteredMetrics(awsCloudWatch,
                 NAMESPACE,
                 excludeMetricsPattern,
-                dimensions);
+                dimensions, metricFilter);
     }
 
     public StatisticType getStatisticType(Metric metric) {

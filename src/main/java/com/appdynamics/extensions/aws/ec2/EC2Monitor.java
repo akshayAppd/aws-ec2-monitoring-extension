@@ -36,7 +36,7 @@ public class EC2Monitor extends SingleNamespaceCloudwatchMonitor<EC2Configuratio
         EC2InstanceNameProvider ec2InstanceNameProvider = EC2InstanceNameProvider.getInstance();
         ec2InstanceNameProvider.initialise(config.getAccounts(),
                 config.getCredentialsDecryptionConfig(),
-                config.getProxyConfig(), config.getEc2InstanceNameConfig(),
+                config.getProxyConfig(), config.getEc2InstanceNameConfig(), config.getTags(),
                 config.getMetricsConfig().getMaxErrorRetrySize());
     }
 
