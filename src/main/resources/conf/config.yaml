@@ -2,9 +2,9 @@ accounts:
   - awsAccessKey: ""
     awsSecretKey: ""
     displayAccountName: ""
-    
+
     # Regions where ec2 is registered
-    # Allowed values: ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-central-1, 
+    # Allowed values: ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-central-1,
     #                 us-east-1, eu-west-1, us-west-1, us-west-2, sa-east-1
     #
     regions: ["us-east-1"]
@@ -65,5 +65,9 @@ concurrencyConfig:
   noOfRegionThreadsPerAccount: 3
   noOfMetricThreadsPerRegion: 3
 
-#prefix used to show up metrics in AppDynamics 
-metricPrefix: "Custom Metrics|Amazon EC2|"
+#prefix used to show up metrics in AppDynamics. This will create this metric in all the tiers, under this path
+#metricPrefix: "Custom Metrics|Amazon EC2|"
+
+#This will create it in specific Tier/Component. Make sure to replace <COMPONENT_ID> with the appropriate one from your environment.
+#To find the <COMPONENT_ID> in your environment, please follow the screenshot https://docs.appdynamics.com/display/PRO42/Build+a+Monitoring+Extension+Using+Java
+metricPrefix: "Server|Component:<COMPONENT_ID>|Custom Metrics|Amazon EC2|"
