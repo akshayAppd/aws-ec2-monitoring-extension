@@ -7,6 +7,7 @@ import static com.appdynamics.extensions.aws.validators.Validator.validateAccoun
 
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.InstanceProfileCredentialsProvider;
 import com.amazonaws.services.ec2.AmazonEC2Client;
 import com.amazonaws.services.ec2.model.DescribeInstancesRequest;
 import com.amazonaws.services.ec2.model.DescribeInstancesResult;
@@ -99,7 +100,7 @@ public class EC2InstanceNameProvider {
         this.tags.set(tags);
         this.maxErrorRetrySize = maxErrorRetrySize;
 
-        if (!initialised.get() && this.ec2InstanceNameConfig.get().isUseInstanceName()) {
+        if (!initialised.get()) {
             LOGGER.info("Initialiasing EC2 instance names...");
             retrieveInstances();
             initiateBackgroundTask(SLEEP_TIME_IN_MINS);
@@ -252,10 +253,22 @@ public class EC2InstanceNameProvider {
 
     private void retrieveInstancesPerAccountPerRegion(Account account, String region,
                                                       InstanceNameDictionary accountInstanceNameDictionary, String... instanceIds) {
-        AWSCredentials awsCredentials = createAWSCredentials(account, credentialsDecryptionConfig.get());
+
+        AWSCredentials awsCredentials = null;
+        if (StringUtils.isNotEmpty(account.getAwsAccessKey()) && StringUtils.isNotEmpty(account.getAwsSecretKey())) {
+            awsCredentials = createAWSCredentials(account, credentialsDecryptionConfig.get());
+        }
+
         ClientConfiguration awsClientConfig = createAWSClientConfiguration(maxErrorRetrySize, proxyConfig.get());
 
-        AmazonEC2Client ec2Client = new AmazonEC2Client(awsCredentials, awsClientConfig);
+        AmazonEC2Client ec2Client = null;
+        if (awsCredentials == null) {
+            LOGGER.info("Credentials not provided trying to use instance profile credentials");
+            ec2Client = new AmazonEC2Client(new InstanceProfileCredentialsProvider(), awsClientConfig);
+        } else {
+            ec2Client = new AmazonEC2Client(awsCredentials, awsClientConfig);
+        }
+
         ec2Client.setEndpoint(String.format(EC2_REGION_ENDPOINT, region));
 
         List<Filter> filters = createFilters(tags);
@@ -300,13 +313,13 @@ public class EC2InstanceNameProvider {
             for (Tag tag : allTags) {
 
                 String name = tag.getName();
-                String value = tag.getValue();
+                List<String> value = tag.getValue();
 
-                if (Strings.isNullOrEmpty(value) && !Strings.isNullOrEmpty(name)) {
+                if ((value == null || value.size() == 0) && !Strings.isNullOrEmpty(name)) {
                     tagWithoutKeyValue.getValues().add(name);
                 } else {
                     if (Strings.isNullOrEmpty(name)) {
-                        if (!Strings.isNullOrEmpty(value)) {
+                        if (value != null && value.size() > 0) {
                             LOGGER.info("Tag name can not be null. Ignoring the value [ " + value + " ]");
                         }
                         continue;
