@@ -21,8 +21,8 @@ Captures EC2 instances statistics from Amazon CloudWatch and displays them in th
 | Section | Fields | Description | Example |
 | ----- | ----- | ----- | ----- |
 | **accounts** | | Fields under this section can be repeated for multiple accounts config |  |
-| | awsAccessKey | AWS Access Key |  |
-| | awsSecretKey | AWS Secret Key |  |
+| | awsAccessKey | AWS Access Key, keep it empty if using instance profile |  |
+| | awsSecretKey | AWS Secret Key, keep it empty if using instance profile |  |
 | | displayAccountName | Display name used in metric path | "MyAWSEC2" |
 | | regions | Regions where ec2 is registered | **Allowed values:**<br/>"ap-southeast-1",<br/>"ap-southeast-2",<br/>"ap-northeast-1",<br/>"eu-central-1",<br/>"eu-west-1",<br/>"us-east-1",<br/>"us-west-1",<br/>"us-west-2",<br/>"sa-east-1" |
 | **credentialsDecryptionConfig** | ----- | ----- | ----- |
