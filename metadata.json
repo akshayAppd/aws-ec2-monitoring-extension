@@ -14,6 +14,10 @@
 		{
 			"name" : "config.yml",
 			"link" : "https://raw.githubusercontent.com/Appdynamics/aws-ec2-monitoring-extension/master/src/main/resources/conf/config.yaml"
+		},
+		{
+			"name" : "region-endpoints.yml",
+			"link" : "https://raw.githubusercontent.com/Appdynamics/aws-ec2-monitoring-extension/master/src/main/resources/conf/region-endpoints.yaml"
 		}
 	]
 }
