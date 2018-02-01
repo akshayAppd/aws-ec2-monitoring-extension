@@ -5,7 +5,7 @@
 	"description" : "An AppDynamics extension to be used with a stand alone Java machine agent to provide metrics for Amazon EC2.",
 	"version" : "1.0.4",
 	"downloadLink" : "https://github.com/Appdynamics/aws-ec2-monitoring-extension/releases/download/1.0.4/awsec2monitor-1.0.4.zip",
-	"imageLink" : "https://github.com/Appdynamics/aws-ec2-monitoring-extension/blob/master/EC2.png",
+	"imageLink" : "https://goo.gl/bwyKbz",
 	"configs" : [
 		{
 			"name" : "monitor.xml",
