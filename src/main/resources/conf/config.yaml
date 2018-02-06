@@ -30,9 +30,9 @@ ec2InstanceNameConfig:
 ec2Instance: ""
 
 #Filter the instances by tag name. tagValue is optional. if tagValue is not provided, we will fetch all the instances with the tagName.
-tags:
-  - name: "Name"
-    value: ["tag1", "tag2", "tag3"]
+#tags:
+#  - name: "Name"
+#    value: ["tag1", "tag2", "tag3"]
 
 # Global metrics config for all accounts
 metricsConfig:
