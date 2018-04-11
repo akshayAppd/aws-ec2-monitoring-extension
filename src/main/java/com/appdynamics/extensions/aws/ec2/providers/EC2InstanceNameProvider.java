@@ -45,7 +45,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class EC2InstanceNameProvider {
 
-    private static final Logger LOGGER = Logger.getLogger("com.singularity.extensions.aws.ec2.EC2InstanceNameProvider");
+    private static final Logger LOGGER = Logger.getLogger(EC2InstanceNameProvider.class);
 
     private AtomicReference<List<Account>> accounts = new AtomicReference<List<Account>>();
 
