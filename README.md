@@ -1,28 +1,28 @@
-#AWS EC2 Monitoring Extension
+# AWS EC2 Monitoring Extension
 
-##Use Case
+## Use Case
 Captures EC2 instances statistics from Amazon CloudWatch and displays them in the AppDynamics Metric Browser.
 
-**Note : By default, the Machine agent can only send a fixed number of metrics to the controller. This extension potentially reports thousands of metrics, so to change this limit, please follow the instructions mentioned [here](https://docs.appdynamics.com/display/PRO40/Metrics+Limits).** 
+**Note : By default, the Machine agent can only send a fixed number of metrics to the controller. This extension potentially reports thousands of metrics, so to change this limit, please follow the instructions mentioned [here](https://docs.appdynamics.com/display/PRO40/Metrics+Limits).**
 
-##Installation
+## Installation
 
 1. Run 'mvn clean install' from aws-ec2-monitoring-extension
 2. Copy and unzip AWSEC2Monitor-\<version\>.zip from 'target' directory into \<machine_agent_dir\>/monitors/
 3. Edit config.yaml file in AWSEC2Monitor/conf and provide the required configuration (see Configuration section)
 4. Restart the Machine Agent.
 
-##Configuration
+## Configuration
 
-###config.yaml
+### config.yaml
 
 **Note: Please avoid using tab (\t) when editing yaml files. You may want to validate the yaml file using a [yaml validator](http://yamllint.com/).**
 
 | Section | Fields | Description | Example |
 | ----- | ----- | ----- | ----- |
 | **accounts** | | Fields under this section can be repeated for multiple accounts config |  |
-| | awsAccessKey | AWS Access Key |  |
-| | awsSecretKey | AWS Secret Key |  |
+| | awsAccessKey | AWS Access Key, keep it empty if using instance profile |  |
+| | awsSecretKey | AWS Secret Key, keep it empty if using instance profile |  |
 | | displayAccountName | Display name used in metric path | "MyAWSEC2" |
 | | regions | Regions where ec2 is registered | **Allowed values:**<br/>"ap-southeast-1",<br/>"ap-southeast-2",<br/>"ap-northeast-1",<br/>"eu-central-1",<br/>"eu-west-1",<br/>"us-east-1",<br/>"us-west-1",<br/>"us-west-2",<br/>"sa-east-1" |
 | **credentialsDecryptionConfig** | ----- | ----- | ----- |
@@ -64,18 +64,18 @@ accounts:
     awsSecretKey: "XXXXXXXXXX1"
     displayAccountName: "TestAccount_1"
     regions: ["us-east-1","us-west-1","us-west-2"]
-    
+
   - awsAccessKey: "XXXXXXXX2"
     awsSecretKey: "XXXXXXXXXX2"
     displayAccountName: "TestAccount_2"
     regions: ["eu-central-1","eu-west-1"]
-    
+
 credentialsDecryptionConfig:
     enableDecryption: "false"
     decryptionKey:
-    
+
 proxyConfig:
-    host: 
+    host:
     port:
     username:
     password:
@@ -89,7 +89,7 @@ metricsConfig:
     metricTypes:
       - metricName: "CurrItems"
         statType: "max"
-        
+
       - metricName: "DecrHits"
         statType: "sum"        
 
@@ -109,7 +109,7 @@ concurrencyConfig:
 metricPrefix: "Custom Metrics|Amazon EC2|"
 ~~~
 
-###AWS Credentials Encryption
+### AWS Credentials Encryption
 To set an encrypted awsAccessKey and awsSecretKey in config.yaml, follow the steps below:
 
 1. Download the util jar to encrypt the AWS Credentials from [here](https://github.com/Appdynamics/maven-repo/blob/master/releases/com/appdynamics/appd-exts-commons/1.1.2/appd-exts-commons-1.1.2.jar).
@@ -117,28 +117,28 @@ To set an encrypted awsAccessKey and awsSecretKey in config.yaml, follow the ste
 
    	~~~   
    	java -cp appd-exts-commons-1.1.2.jar com.appdynamics.extensions.crypto.Encryptor EncryptionKey CredentialToEncrypt
-   	
-   	For example: 
+
+   	For example:
    	java -cp "appd-exts-commons-1.1.2.jar" com.appdynamics.extensions.crypto.Encryptor test myAwsAccessKey
-   	
+
    	java -cp "appd-exts-commons-1.1.2.jar" com.appdynamics.extensions.crypto.Encryptor test myAwsSecretKey
    	~~~
-   	
+
 3. Set the decryptionKey field in config.yaml with the encryption key used, as well as the resulting encrypted awsAccessKey and awsSecretKey in their respective fields.
 
-##Metrics
+## Metrics
 Typical metric path: **Application Infrastructure Performance|\<Tier\>|Custom Metrics|Amazon EC2|\<Account Name\>|\<Region\>|Instance|\<instance id or name\>** followed by the metrics defined in the link below:
 
 - [EC2 Metrics](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/ec2-metricscollected.html)
 
-##Contributing
+## Contributing
 
 Always feel free to fork and contribute any changes directly via [GitHub](https://github.com/Appdynamics/aws-ec2-monitoring-extension).
 
-##Community
+## Community
 
 Find out more in the [AppSphere](https://www.appdynamics.com/community/exchange/extension/aws-ec2-monitoring-extension) community.
 
-##Support
+## Support
 
 For any questions or feature request, please contact [AppDynamics Center of Excellence](mailto:help@appdynamics.com).
