@@ -8,7 +8,8 @@ accounts:
     #                 us-east-1, eu-west-1, us-west-1, us-west-2, sa-east-1
     #
     regions: ["us-east-1"]
-    
+
+#TODO Make it consistent with other extensions by using encryptionKey.
 credentialsDecryptionConfig:
     enableDecryption: "false"
     decryptionKey:
@@ -21,9 +22,11 @@ proxyConfig:
     
 ec2InstanceNameConfig:
     useNameInMetrics: "true"
+    # TODO Needs to be removed
     tagFilterName: "tag-key"
     tagKey: "Name"
 
+#TODO remove one of the below 2 fields. But keep the feature in the code.
 #EC2 instance for which you want to get the metrics. This is useful when you want to monitor only 1 instance. Keep this empty if you want to monitor all the available instances.
 #Only 1 instance id is acceptable here as AWS CloudWatch API does not support multiple dimension values for the dimension
 ec2Instance: ""
@@ -44,6 +47,8 @@ metricsConfig:
     # Note: Irrespective of the metric type, value will still be reported as
     # Observed value to the Controller
     includeMetrics:
+    #TODO metricQualifiers need to be defined, other two metric need to be specified.
+    #TODO Add timeRage property global and local.
        - name: "CPUUtilization"
          alias: "CPUUtilization"
          statType: "ave"
@@ -74,6 +79,7 @@ metricsConfig:
 # Detailed will fire CloudWatch API calls every 1 minutes
 cloudWatchMonitoring: "Basic"
 
+#TODO Make sure cloudWatchMonitoringInterval is commented out by default.
 #If you want any other interval ( other than the mentioned values in the above configuration ) configure it here, if not leave it empty. This value is in minutes
 cloudWatchMonitoringInterval: 0
 

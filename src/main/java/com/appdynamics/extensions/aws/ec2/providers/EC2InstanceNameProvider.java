@@ -172,9 +172,11 @@ public class EC2InstanceNameProvider {
     private void initiateBackgroundTask(long delay) {
         LOGGER.info("Initiating background task...");
 
+        //#TODO Wrap it with MonitorExecutorService from extensions commons.
         ScheduledExecutorService service = Executors.newScheduledThreadPool(1);
         service.scheduleAtFixedRate(
                 new Runnable() {
+
                     public void run() {
                         retrieveInstances();
                     }
@@ -192,6 +194,7 @@ public class EC2InstanceNameProvider {
 
         for (Account account : accounts.get()) {
             try {
+                //#TODO Check if this is required.
                 validateAccount(account);
                 InstanceNameDictionary accountInstancesDictionary = getAccountInstanceNameDictionary(account.getDisplayAccountName());
                 noOfTasks += addParallelTask(parallelTasksService, account, accountInstancesDictionary);
