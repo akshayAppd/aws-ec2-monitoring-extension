@@ -79,7 +79,7 @@ Please place the extension in the "monitors" directory of your Machine Agent ins
 | | ----- | ----- | ----- |
 | | maxErrorRetrySize | The max number of retry attempts for failed retryable requests | 1 |
 | | ----- | ----- | ----- |
-|metricPrefix |  | The path prefix for viewing metrics in the metric browser. | "Server\|Component:<COMPONENT_ID>\|Custom Metrics\|Amazon EC2\|" |
+|**metricPrefix** |  | The path prefix for viewing metrics in the metric browser. | "Server\|Component:<COMPONENT_ID>\|Custom Metrics\|Amazon EC2\|" |
 
 
 **Below is an example config for monitoring multiple accounts and regions:**
