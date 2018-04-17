@@ -233,5 +233,4 @@ Always feel free to fork and contribute any changes directly here on [GitHub](ht
 |--------------------------|------------|
 |Extension Version         |2.0.0       |
 |Controller Compatibility  |3.7 or Later|
-|Product Tested On         |3.2.0+      |
 |Last Update               |17 Apr 2018 |
