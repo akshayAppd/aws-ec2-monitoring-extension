@@ -9,7 +9,7 @@ Please give the following permissions to the account being used to with the exte
 2. **cloudwatch:GetMetricStatistics**
 3. **ec2:describeinstances**
 
-In order to use this extension, you do need a [Standalone JAVA Machine Agent] (https://docs.appdynamics.com/display/PRO44/Standalone+Machine+Agents) or [SIM Agent] (https://docs.appdynamics.com/display/PRO44/Server+Visibility).  For more details on downloading these products, please  visit [here]https://download.appdynamics.com/.
+In order to use this extension, you do need a [Standalone JAVA Machine Agent](https://docs.appdynamics.com/display/PRO44/Standalone+Machine+Agents) or [SIM Agent](https://docs.appdynamics.com/display/PRO44/Server+Visibility).  For more details on downloading these products, please  visit [here](https://download.appdynamics.com/).
 
 The extension needs to be able to connect to AWS Cloudwatch in order to collect and send metrics. To do this, you will have to either establish a remote connection in between the extension and the product, or have an agent on the same machine running the product in order for the extension to collect and send the metrics.
 
