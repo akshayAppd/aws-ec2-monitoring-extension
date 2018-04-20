@@ -1,15 +1,15 @@
 # AWS EC2 Monitoring Extension
 
 ## Use Case
-Captures EC2 instances statistics from Amazon CloudWatch and displays them in the AppDynamics Metric Browser.
+Captures statistics for EC2 instances from Amazon CloudWatch and displays them in the AppDynamics Metric Browser.
 
 ## Prerequisites
-Below roles are required to run this extension
-1. cloudwatch:ListMetrics
-2. cloudwatch:GetMetricStatistics
-3. ec2:describeinstances
+Please give the following permissions to the account being used to with the extension. 
+1. **cloudwatch:ListMetrics**
+2. **cloudwatch:GetMetricStatistics**
+3. **ec2:describeinstances**
 
-In order to use this extension, you do need a Standalone JAVA Machine Agent (https://docs.appdynamics.com/display/PRO44/Java+Agent) or SIM Agent (https://docs.appdynamics.com/display/PRO44/Server+Visibility).  For more details on downloading these products, please  visit https://download.appdynamics.com/.
+In order to use this extension, you do need a [Standalone JAVA Machine Agent](https://docs.appdynamics.com/display/PRO44/Standalone+Machine+Agents) or [SIM Agent](https://docs.appdynamics.com/display/PRO44/Server+Visibility).  For more details on downloading these products, please  visit [here](https://download.appdynamics.com/).
 
 The extension needs to be able to connect to AWS Cloudwatch in order to collect and send metrics. To do this, you will have to either establish a remote connection in between the extension and the product, or have an agent on the same machine running the product in order for the extension to collect and send the metrics.
 
@@ -21,9 +21,11 @@ The extension needs to be able to connect to AWS Cloudwatch in order to collect 
 3. Edit config.yml file in AWSEC2Monitor and provide the required configuration (see Configuration section)
 4. Restart the Machine Agent.
 
-Please place the extension in the "monitors" directory of your Machine Agent installation directory. Do not place the extension in the "extensions" directory of your Machine Agent installation directory.
+Please place the extension in the "**monitors**" directory of your Machine Agent installation directory. Do not place the extension in the "**extensions**" directory of your Machine Agent installation directory.
 
 ## Configuration
+
+In order to use the extension, you need to update the config.yml file that is present in the extension folder. The following is an explanation of the configurable fields that are present in the config.yml file.
 
 ### config.yaml
 
