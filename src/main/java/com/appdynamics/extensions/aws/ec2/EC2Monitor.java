@@ -74,7 +74,7 @@ public class EC2Monitor extends SingleNamespaceCloudwatchMonitor<EC2Configuratio
                 config.getMetricsConfig(),
                 metricsProcessor,
                 config.getMetricPrefix())
-                .withCredentialsEncryptionConfig(config.getCredentialsDecryptionConfig())
+                .withCredentialsDecryptionConfig(config.getCredentialsDecryptionConfig())
                 .withProxyConfig(config.getProxyConfig())
                 .build();
     }
