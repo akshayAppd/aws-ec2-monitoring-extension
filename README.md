@@ -187,6 +187,19 @@ regionEndPoints:
 metricPrefix: "Server|Component:<COMPONENT_ID>|Custom Metrics|Amazon EC2|"
 ~~~
 
+## Configuration Steps
+
+1. Configure the "COMPONENT_ID" under which the metrics need to be reported. This can be done by changing the value of `<COMPONENT_ID>` in
+     metricPrefix: "Server|Component:<COMPONENT_ID>|Custom Metrics|Amazon EC2|".
+
+     For example,
+     ```
+     metricPrefix: "Server|Component:100|Custom Metrics|Amazon EC2|"
+     ```
+2. Configure "awsAccessKey" and "awsSecretKey". If you are running this extension inside an EC2 instance which has IAM profile configured then you don't have to configure these values, extension will use IAM profile to authenticate.
+3. Configure "regions". Extension collects metrics from all the regions configured here.
+4. If you want to encrypt the "awsAccessKey" and "awsSecretKey" then follow the "Credentials Encryption" section and provide the encrypted values in "awsAccessKey" and "awsSecretKey". Configure "enableDecryption" of "credentialsDecryptionConfig" to true and provide the encryption key in "encryptionKey"
+
 ## Metrics
 
 Typical metric path: **Application Infrastructure Performance|\<Tier\>|Custom Metrics|Amazon EC2|\<Account Name\>|\<Region\>|Instance|\<instance id or name\>** followed by the metrics defined in the link below:
