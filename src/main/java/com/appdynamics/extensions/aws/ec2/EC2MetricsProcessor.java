@@ -13,7 +13,8 @@ import static com.appdynamics.extensions.aws.Constants.METRIC_PATH_SEPARATOR;
 import com.amazonaws.services.cloudwatch.AmazonCloudWatch;
 import com.amazonaws.services.cloudwatch.model.DimensionFilter;
 import com.amazonaws.services.cloudwatch.model.Metric;
-import com.appdynamics.extensions.aws.config.MetricType;
+import com.appdynamics.extensions.aws.config.IncludeMetric;
+import com.appdynamics.extensions.aws.dto.AWSMetric;
 import com.appdynamics.extensions.aws.ec2.providers.EC2InstanceNameProvider;
 import com.appdynamics.extensions.aws.metric.AccountMetricStatistics;
 import com.appdynamics.extensions.aws.metric.MetricStatistic;
@@ -23,18 +24,21 @@ import com.appdynamics.extensions.aws.metric.StatisticType;
 import com.appdynamics.extensions.aws.metric.processors.MetricsProcessor;
 import com.appdynamics.extensions.aws.metric.processors.MetricsProcessorHelper;
 import com.google.common.base.Strings;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.regex.Pattern;
+import java.util.concurrent.atomic.LongAdder;
 
 /**
  * @author Florencio Sarmiento
  */
 public class EC2MetricsProcessor implements MetricsProcessor {
+
+    private static final Logger LOGGER = Logger.getLogger(EC2MetricsProcessor.class);
+
 
     private static final String NAMESPACE = "AWS/EC2";
 
@@ -42,20 +46,16 @@ public class EC2MetricsProcessor implements MetricsProcessor {
 
     private static final String INSTANCE = "Instance";
 
-    private List<MetricType> metricTypes;
+    private List<IncludeMetric> includeMetrics;
 
     private String ec2Instance;
 
-    private Pattern excludeMetricsPattern;
-
-    public EC2MetricsProcessor(List<MetricType> metricTypes,
-                               Set<String> excludeMetrics, String ec2Instance) {
-        this.metricTypes = metricTypes;
-        this.excludeMetricsPattern = MetricsProcessorHelper.createPattern(excludeMetrics);
+    public EC2MetricsProcessor(List<IncludeMetric> includeMetrics, String ec2Instance) {
+        this.includeMetrics = includeMetrics;
         this.ec2Instance = ec2Instance;
     }
 
-    public List<Metric> getMetrics(AmazonCloudWatch awsCloudWatch, String accountName) {
+    public List<AWSMetric> getMetrics(AmazonCloudWatch awsCloudWatch, String accountName, LongAdder awsRequestsCounter) {
 
         List<DimensionFilter> dimensions = new ArrayList<DimensionFilter>();
 
@@ -70,33 +70,54 @@ public class EC2MetricsProcessor implements MetricsProcessor {
 
         EC2MetricPredicate metricFilter = new EC2MetricPredicate(accountName);
 
-        return MetricsProcessorHelper.getFilteredMetrics(awsCloudWatch,
+        return MetricsProcessorHelper.getFilteredMetrics(awsCloudWatch, awsRequestsCounter,
                 NAMESPACE,
-                excludeMetricsPattern,
+                includeMetrics,
                 dimensions, metricFilter);
     }
 
-    public StatisticType getStatisticType(Metric metric) {
-        return MetricsProcessorHelper.getStatisticType(metric, metricTypes);
+    public StatisticType getStatisticType(AWSMetric metric) {
+        return MetricsProcessorHelper.getStatisticType(metric.getIncludeMetric(), includeMetrics);
     }
 
-    public Map<String, Double> createMetricStatsMapForUpload(NamespaceMetricStatistics namespaceMetricStats) {
+    public List<com.appdynamics.extensions.metrics.Metric> createMetricStatsMapForUpload(NamespaceMetricStatistics namespaceMetricStats) {
         EC2InstanceNameProvider ec2InstanceNameProvider = EC2InstanceNameProvider.getInstance();
-        Map<String, Double> statsMap = new HashMap<String, Double>();
+        List<com.appdynamics.extensions.metrics.Metric> stats = new ArrayList<>();
+
 
         if (namespaceMetricStats != null) {
             for (AccountMetricStatistics accountStats : namespaceMetricStats.getAccountMetricStatisticsList()) {
                 for (RegionMetricStatistics regionStats : accountStats.getRegionMetricStatisticsList()) {
                     for (MetricStatistic metricStat : regionStats.getMetricStatisticsList()) {
+
                         String metricPath = createMetricPath(accountStats.getAccountName(),
                                 regionStats.getRegion(), metricStat, ec2InstanceNameProvider);
-                        statsMap.put(metricPath, metricStat.getValue());
+
+                        if (metricStat.getValue() != null) {
+
+                            Map<String, Object> metricProperties = new HashMap<>();
+                            AWSMetric awsMetric = metricStat.getMetric();
+                            IncludeMetric includeMetric = awsMetric.getIncludeMetric();
+
+                            metricProperties.put("alias", includeMetric.getAlias());
+                            metricProperties.put("multiplier", includeMetric.getMultiplier());
+                            metricProperties.put("aggregationType", includeMetric.getAggregationType());
+                            metricProperties.put("timeRollUpType", includeMetric.getTimeRollUpType());
+                            metricProperties.put("clusterRollUpType", includeMetric.getClusterRollUpType());
+                            metricProperties.put("delta", includeMetric.isDelta());
+                            
+                            com.appdynamics.extensions.metrics.Metric metric = new com.appdynamics.extensions.metrics.Metric(includeMetric.getName(), Double.toString(metricStat.getValue()),
+                                    metricStat.getMetricPrefix() + metricPath, metricProperties);
+                            stats.add(metric);
+                        } else {
+                            LOGGER.debug(String.format("Ignoring metric [ %s ] which has value null", metricPath));
+                        }
                     }
                 }
             }
         }
 
-        return statsMap;
+        return stats;
     }
 
     public String getNamespace() {
@@ -106,7 +127,10 @@ public class EC2MetricsProcessor implements MetricsProcessor {
     private String createMetricPath(String accountName, String region,
                                     MetricStatistic metricStatistic, EC2InstanceNameProvider ec2InstanceNameProvider) {
 
-        String instanceId = metricStatistic.getMetric().getDimensions().get(0).getValue();
+        AWSMetric awsMetric = metricStatistic.getMetric();
+        IncludeMetric includeMetric = awsMetric.getIncludeMetric();
+        Metric metric = awsMetric.getMetric();
+        String instanceId = metric.getDimensions().get(0).getValue();
         String instanceName = ec2InstanceNameProvider.getInstanceName(accountName, region, instanceId);
 
         StringBuilder metricPath = new StringBuilder(accountName)
@@ -117,7 +141,7 @@ public class EC2MetricsProcessor implements MetricsProcessor {
                 .append(METRIC_PATH_SEPARATOR)
                 .append(instanceName)
                 .append(METRIC_PATH_SEPARATOR)
-                .append(metricStatistic.getMetric().getMetricName());
+                .append(includeMetric.getName());
 
         return metricPath.toString();
     }

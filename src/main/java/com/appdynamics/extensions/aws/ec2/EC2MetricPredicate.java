@@ -24,7 +24,6 @@ public class EC2MetricPredicate implements Predicate<Metric> {
     public EC2MetricPredicate(String accountName) {
         EC2InstanceNameProvider ec2InstanceNameProvider = EC2InstanceNameProvider.getInstance();
         instanceNameDictionary = ec2InstanceNameProvider.getInstanceNameDictionary(accountName);
-
     }
 
     public boolean apply(Metric metric) {

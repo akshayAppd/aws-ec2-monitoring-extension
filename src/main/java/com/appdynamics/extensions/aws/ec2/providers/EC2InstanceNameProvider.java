@@ -11,7 +11,6 @@ package com.appdynamics.extensions.aws.ec2.providers;
 import static com.appdynamics.extensions.aws.Constants.DEFAULT_THREAD_TIMEOUT;
 import static com.appdynamics.extensions.aws.util.AWSUtil.createAWSClientConfiguration;
 import static com.appdynamics.extensions.aws.util.AWSUtil.createAWSCredentials;
-import static com.appdynamics.extensions.aws.validators.Validator.validateAccount;
 
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.AWSCredentials;
@@ -22,12 +21,15 @@ import com.amazonaws.services.ec2.model.DescribeInstancesResult;
 import com.amazonaws.services.ec2.model.Filter;
 import com.amazonaws.services.ec2.model.Instance;
 import com.amazonaws.services.ec2.model.Reservation;
+import com.appdynamics.extensions.MonitorExecutorService;
+import com.appdynamics.extensions.MonitorThreadPoolExecutor;
 import com.appdynamics.extensions.aws.config.Account;
 import com.appdynamics.extensions.aws.config.CredentialsDecryptionConfig;
 import com.appdynamics.extensions.aws.config.ProxyConfig;
 import com.appdynamics.extensions.aws.ec2.config.Ec2InstanceNameConfig;
 import com.appdynamics.extensions.aws.ec2.config.Tag;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -36,13 +38,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.concurrent.CompletionService;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorCompletionService;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -53,7 +52,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class EC2InstanceNameProvider {
 
-    private static final Logger LOGGER = Logger.getLogger("com.singularity.extensions.aws.ec2.EC2InstanceNameProvider");
+    private static final Logger LOGGER = Logger.getLogger(EC2InstanceNameProvider.class);
 
     private AtomicReference<List<Account>> accounts = new AtomicReference<List<Account>>();
 
@@ -80,7 +79,8 @@ public class EC2InstanceNameProvider {
 
     private AtomicBoolean initialised = new AtomicBoolean(false);
 
-    private ExecutorService ec2WorkerPool = Executors.newFixedThreadPool(3);
+    private MonitorExecutorService ec2WorkerPool = new MonitorThreadPoolExecutor(new ScheduledThreadPoolExecutor(3));
+
 
     private static EC2InstanceNameProvider instance;
 
@@ -172,30 +172,26 @@ public class EC2InstanceNameProvider {
     private void initiateBackgroundTask(long delay) {
         LOGGER.info("Initiating background task...");
 
-        ScheduledExecutorService service = Executors.newScheduledThreadPool(1);
-        service.scheduleAtFixedRate(
+        MonitorExecutorService executorService = new MonitorThreadPoolExecutor(new ScheduledThreadPoolExecutor(1));
+
+        executorService.scheduleAtFixedRate("InstanceNameFetcher",
                 new Runnable() {
+
                     public void run() {
                         retrieveInstances();
                     }
                 },
-                delay, SLEEP_TIME_IN_MINS, TimeUnit.MINUTES);
+                (int) delay, SLEEP_TIME_IN_MINS, TimeUnit.MINUTES);
     }
 
     private void retrieveInstances() {
         LOGGER.info("Retrieving ec2 instances' names...");
 
-        CompletionService<Void> parallelTasksService =
-                new ExecutorCompletionService<Void>(ec2WorkerPool);
-
-        int noOfTasks = 0;
-
+        List<FutureTask<Void>> allFutureTasks = new ArrayList<FutureTask<Void>>();
         for (Account account : accounts.get()) {
             try {
-                validateAccount(account);
                 InstanceNameDictionary accountInstancesDictionary = getAccountInstanceNameDictionary(account.getDisplayAccountName());
-                noOfTasks += addParallelTask(parallelTasksService, account, accountInstancesDictionary);
-
+                allFutureTasks.addAll(addParallelTask(account, accountInstancesDictionary));
             } catch (IllegalArgumentException e) {
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug(String.format("Issue while creating task for Account [%s]",
@@ -204,14 +200,13 @@ public class EC2InstanceNameProvider {
             }
         }
 
-        checkAllTasksCompleted(parallelTasksService, noOfTasks);
+        checkAllTasksCompleted(allFutureTasks);
     }
 
-    private void checkAllTasksCompleted(CompletionService<Void> parallelTasksService, int noOfTasks) {
-        for (int index = 0; index < noOfTasks; index++) {
+    private void checkAllTasksCompleted(List<FutureTask<Void>> futureTasks) {
+        for (FutureTask<Void> task : futureTasks) {
             try {
-                parallelTasksService.take().get(DEFAULT_THREAD_TIMEOUT, TimeUnit.SECONDS);
-
+                task.get(DEFAULT_THREAD_TIMEOUT, TimeUnit.SECONDS);
             } catch (InterruptedException e) {
                 LOGGER.error("Task interrupted. ", e);
             } catch (ExecutionException e) {
@@ -222,29 +217,45 @@ public class EC2InstanceNameProvider {
         }
     }
 
-    private int addParallelTask(CompletionService<Void> parallelTasksService,
-                                final Account account,
-                                final InstanceNameDictionary accountInstancesDictionary) {
+    private List<FutureTask<Void>> addParallelTask(Account account, InstanceNameDictionary accountInstancesDictionary) {
 
-        int count = 0;
+        List<FutureTask<Void>> futureTasks = Lists.newArrayList();
+
 
         for (final String region : account.getRegions()) {
-            try {
-                parallelTasksService.submit(new Callable<Void>() {
-                    public Void call() throws Exception {
-                        retrieveInstancesPerAccountPerRegion(account, region, accountInstancesDictionary);
-                        return null;
-                    }
-                });
+            InstancesPerAccountPerRegionCollectorTask ec2NamesCollectorTask = new InstancesPerAccountPerRegionCollectorTask(account, region, accountInstancesDictionary);
+            FutureTask<Void> ec2NamesTaskExecutor = new FutureTask<Void>(ec2NamesCollectorTask);
 
-                ++count;
+            ec2WorkerPool.submit("EC2NamesCollector", ec2NamesTaskExecutor);
+            futureTasks.add(ec2NamesTaskExecutor);
+        }
+
+        return futureTasks;
+    }
+
+    private class InstancesPerAccountPerRegionCollectorTask implements Callable<Void> {
+
+        private Account account;
+        private String region;
+        private InstanceNameDictionary accountInstanceNameDictionary;
+
+        InstancesPerAccountPerRegionCollectorTask(Account account, String region, InstanceNameDictionary accountInstanceNameDictionary) {
+            this.account = account;
+            this.region = region;
+            this.accountInstanceNameDictionary = accountInstanceNameDictionary;
+
+        }
+
+        @Override
+        public Void call() {
+            try {
+                retrieveInstancesPerAccountPerRegion(account, region, accountInstanceNameDictionary);
             } catch (Exception e) {
                 LOGGER.error(String.format("Error while retrieving EC2 instances for Account [%s] Region [%s]",
                         account.getDisplayAccountName(), region), e);
             }
+            return null;
         }
-
-        return count;
     }
 
     private InstanceNameDictionary getAccountInstanceNameDictionary(String accountName) {
