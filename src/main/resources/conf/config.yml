@@ -1,3 +1,10 @@
+#prefix used to show up metrics in AppDynamics. This will create this metric in all the tiers, under this path
+#metricPrefix: "Custom Metrics|Amazon EC2|"
+
+#This will create it in specific Tier/Component. Make sure to replace <COMPONENT_ID> with the appropriate one from your environment.
+#To find the <COMPONENT_ID> in your environment, please follow the screenshot https://docs.appdynamics.com/display/PRO42/Build+a+Monitoring+Extension+Using+Java
+metricPrefix: "Server|Component:<COMPONENT_ID>|Custom Metrics|Amazon EC2|"
+
 accounts:
   - awsAccessKey: ""
     awsSecretKey: ""
@@ -124,10 +131,3 @@ metricsConfig:
     # (ex: 5xx error responses from a service) or throttling errors
     #
     maxErrorRetrySize: 0
-
-#prefix used to show up metrics in AppDynamics. This will create this metric in all the tiers, under this path
-#metricPrefix: "Custom Metrics|Amazon EC2|"
-
-#This will create it in specific Tier/Component. Make sure to replace <COMPONENT_ID> with the appropriate one from your environment.
-#To find the <COMPONENT_ID> in your environment, please follow the screenshot https://docs.appdynamics.com/display/PRO42/Build+a+Monitoring+Extension+Using+Java
-metricPrefix: "Server|Component:<COMPONENT_ID>|Custom Metrics|Amazon EC2|"
