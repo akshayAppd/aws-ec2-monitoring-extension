@@ -31,9 +31,6 @@ object AwsExtensionsCi_Build : BuildType({
             mavenVersion = defaultProvidedVersion()
             jdkHome = "%env.JDK_18%"
         }
-        dockerCompose {
-            file = "docker-compose.yml"
-        }
         dockerCommand {
             commandType = build {
                 source = path {
