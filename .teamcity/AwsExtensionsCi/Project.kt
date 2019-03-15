@@ -14,11 +14,13 @@ object Project : Project({
     parentId("_Root")
     name = "AWS_Extensions_CI"
 
-    vcsRoot(AwsExtensionsCi_HttpsGithubComAkshayAppdAwsEc2monitoringExtensionCiRefsHeadsMast)
     vcsRoot(AwsExtensionsCi_AkshayGithub)
 
     buildType(AwsExtensionsCi_CleanBuild)
-    buildType(AwsExtensionsCi_SetupLinuxEnvironment)
+    buildType(AwsExtensionsCi_SetupInLinux)
+    buildType(AwsExtensionsCi_IntegrationTestInLinux)
+    buildType(AwsExtensionsCi_StopLinux)
+    buildType(AwsExtensionsCi_Publish)
 
     params {
         password("env.APPDYNAMICS_AGENT_ACCOUNT_ACCESS_KEY", "credentialsJSON:9a2e4645-ba0b-4431-89a9-02f31f720a92", label = "Controller access key", readOnly = true)
@@ -41,4 +43,12 @@ object Project : Project({
             storeSecureParamsOutsideOfVcs = true
         }
     }
+
+    buildTypesOrder = arrayListOf(
+            AwsExtensionsCi_CleanBuild,
+            AwsExtensionsCi_SetupInLinux,
+            AwsExtensionsCi__IntegrationTestInLinux,
+            AwsExtensionsCi__StopLinux,
+            AwsExtensionsCi__Publish
+    )
 })
