@@ -12,6 +12,7 @@ services:
      - MACHINE_AGENT_PROPERTIES=-Dappdynamics.sim.enabled=true -Dappdynamics.docker.enabled=true
      - AWS_ACCESS_KEY
      - AWS_SECRET_KEY
+     - EC2_INSTANCE_NAME=aws_btd_terraform
     build:
       context: .
       dockerfile: Dockerfile

@@ -17,5 +17,8 @@ RUN find /opt/appdynamics/monitors/ -name '*.zip' -delete
 RUN terraform init
 RUN terraform apply -auto-approve /usr/local/bin/terraform -var 'access_key=${AWS_ACCESS_KEY}' -var 'secret_key=${AWS_SECRET_KEY}'
 
+RUN output "instance_id" {
+  value = "${element(aws_instance.aws_btd.*.id, 0)}"
+}
 
 CMD ["sh", "-c", "java ${MACHINE_AGENT_PROPERTIES} -jar /opt/appdynamics/machineagent.jar"]
