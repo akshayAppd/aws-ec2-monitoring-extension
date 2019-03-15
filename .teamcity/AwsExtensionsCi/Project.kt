@@ -17,7 +17,7 @@ object Project : Project({
     vcsRoot(AwsExtensionsCi_HttpsGithubComAkshayAppdAwsEc2monitoringExtensionCiRefsHeadsMast)
     vcsRoot(AwsExtensionsCi_AkshayGithub)
 
-    buildType(AwsExtensionsCi_Build)
+    buildType(AwsExtensionsCi_CleanBuild)
 
     params {
         password("env.APPDYNAMICS_AGENT_ACCOUNT_ACCESS_KEY", "credentialsJSON:9a2e4645-ba0b-4431-89a9-02f31f720a92", label = "Controller access key", readOnly = true)
