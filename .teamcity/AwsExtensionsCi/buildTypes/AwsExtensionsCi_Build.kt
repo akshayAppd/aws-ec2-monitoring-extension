@@ -31,13 +31,6 @@ object AwsExtensionsCi_Build : BuildType({
             mavenVersion = defaultProvidedVersion()
             jdkHome = "%env.JDK_18%"
         }
-        dockerCommand {
-            commandType = build {
-                source = path {
-                    path = "Dockerfile"
-                }
-            }
-        }
     }
 
     triggers {
