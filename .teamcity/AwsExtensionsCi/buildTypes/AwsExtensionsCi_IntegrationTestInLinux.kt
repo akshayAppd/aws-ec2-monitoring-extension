@@ -13,7 +13,7 @@ object AwsExtensionsCi_IntegrationTestInLinux : BuildType({
     name = "IntegrationTest in Linux"
 
     vcs {
-        root(ExtensionsTest_AWS_EC2MonitoringExtension.vcsRoots.ExtensionsTest_AWS_EC2MonitoringExtension_AkshayGithub)
+        root(AwsExtensionsCi.vcsRoots.AwsExtensionsCi_AkshayGitHub)
 
     }
 
@@ -26,7 +26,7 @@ object AwsExtensionsCi_IntegrationTestInLinux : BuildType({
     }
 
     dependencies {
-        dependency(ExtensionsTest_AWS_EC2MonitoringExtension_SetupInLinux) {
+        dependency(AwsExtensionsCi_SetupInLinux) {
             snapshot {
 
             }

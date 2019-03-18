@@ -8,7 +8,7 @@ object AwsExtensionsCi_CleanBuild : BuildType({
     name = "Clean Build"
 
     vcs {
-        root(AwsExtensionsCi.vcsRoots.AwsExtensionsCi_HttpsGithubComAkshayAppdAwsEc2monitoringExtensionCiRefsHeadsMast)
+        root(AwsExtensionsCi.vcsRoots.AwsExtensionsCi_AkshayGitHub)
     }
 
     steps {

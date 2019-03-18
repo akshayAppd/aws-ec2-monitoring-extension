@@ -14,7 +14,7 @@ object AwsExtensionsCi_Publish : BuildType({
     name = "Publish build artifact"
 
     vcs {
-        root(ExtensionsTest_AWS_EC2MonitoringExtension.vcsRoots.ExtensionsTest_AWS_EC2MonitoringExtension_AkshayGithub)
+        root(AwsExtensionsCi.vcsRoots.AwsExtensionsCi_AkshayGitHub)
     }
 
     steps {
@@ -26,7 +26,7 @@ object AwsExtensionsCi_Publish : BuildType({
     }
 
     dependencies {
-        dependency(ExtensionsTest_AWS_EC2MonitoringExtension_StopLinux) {
+        dependency(AwsExtensionsCi_StopLinux) {
             snapshot {
 
             }
