@@ -47,8 +47,8 @@ object Project : Project({
     buildTypesOrder = arrayListOf(
             AwsExtensionsCi_CleanBuild,
             AwsExtensionsCi_SetupInLinux,
-            AwsExtensionsCi__IntegrationTestInLinux,
-            AwsExtensionsCi__StopLinux,
-            AwsExtensionsCi__Publish
+            AwsExtensionsCi_IntegrationTestInLinux,
+            AwsExtensionsCi_StopLinux,
+            AwsExtensionsCi_Publish
     )
 })
