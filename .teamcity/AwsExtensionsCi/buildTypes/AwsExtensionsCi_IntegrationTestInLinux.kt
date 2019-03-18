@@ -7,9 +7,9 @@ import jetbrains.buildServer.configs.kotlin.v2017_2.triggers.vcs
 /**
  * @author Akshay Srivastava
  */
-object AwsExtensionsCI_IntegrationTestInLinux : BuildType({
+object AwsExtensionsCi_IntegrationTestInLinux : BuildType({
     uuid = "0aa6257c-7671-4f9c-9ceb-cae9763d353d"
-    id = "AwsExtensionsCI_IntegrationTestInLinux"
+    id = "AwsExtensionsCi_IntegrationTestInLinux"
     name = "IntegrationTest in Linux"
 
     vcs {

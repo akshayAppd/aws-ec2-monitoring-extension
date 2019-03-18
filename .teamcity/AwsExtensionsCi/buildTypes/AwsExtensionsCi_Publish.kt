@@ -8,9 +8,9 @@ import jetbrains.buildServer.configs.kotlin.v2017_2.triggers.vcs
  * @author Akshay Srivastava
  */
 
-object AwsExtensionsCI_Publish : BuildType({
+object AwsExtensionsCi_Publish : BuildType({
     uuid = "7f47289a-f4ba-4cc7-95e1-3e232b46064c"
-    id = "AwsExtensionsCI_Publish"
+    id = "AwsExtensionsCi_Publish"
     name = "Publish build artifact"
 
     vcs {

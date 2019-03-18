@@ -2,16 +2,15 @@ package AwsExtensionsCi.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2017_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2017_2.buildSteps.exec
-import jetbrains.buildServer.configs.kotlin.v2017_2.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.v2017_2.triggers.vcs
 
 /**
  * @author Akshay Srivastava
  */
-object AwsExtensionsCI_SetupInLinux : BuildType({
-    uuid = "e931478d-93ee-469b-9b33-edeb583e874e"
-    id = "AwsExtensionsCI_SetupInLinux"
-    name = "Setup Linux Environment"
+object AwsExtensionsCi_StopLinux : BuildType({
+    uuid = "e9cefadd-4c23-4fea-961c-f76b9af201e9"
+    id = "AwsExtensionsCi_StopLinux"
+    name = "Stop Linux docker"
 
     vcs {
         root(AwsExtensionsCi.vcsRoots.AwsExtensionsCi_AkshayGitHub)
@@ -21,18 +20,12 @@ object AwsExtensionsCI_SetupInLinux : BuildType({
     steps {
         exec {
             path = "make"
-            arguments = "dockerRun"
-        }
-
-        //Waits for 5 minutes to send metrics to the controller
-        exec {
-            path = "make"
-            arguments = "sleep"
+            arguments = "dockerStop"
         }
     }
 
     dependencies {
-        dependency(AwsExtensionsCi_CleanBuild) {
+        dependency(AwsExtensionsCi_IntegrationTestInLinux) {
             snapshot {
 
             }
