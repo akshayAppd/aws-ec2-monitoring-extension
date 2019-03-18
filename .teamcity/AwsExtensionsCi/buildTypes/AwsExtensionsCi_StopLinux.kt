@@ -24,13 +24,13 @@ object AwsExtensionsCi_StopLinux : BuildType({
         }
     }
 
-    dependencies {
+    /*dependencies {
         dependency(AwsExtensionsCi_IntegrationTestInLinux) {
             snapshot {
 
             }
         }
-    }
+    }*/
 
     triggers {
         vcs {
