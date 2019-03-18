@@ -1,9 +1,7 @@
 package AwsExtensionsCi
 
 import AwsExtensionsCi.buildTypes.*
-import AwsExtensionsCi.vcsRoots.*
 import AwsExtensionsCi.vcsRoots.AwsExtensionsCi_AkshayGithub
-import jetbrains.buildServer.configs.kotlin.v2017_2.*
 import jetbrains.buildServer.configs.kotlin.v2017_2.Project
 import jetbrains.buildServer.configs.kotlin.v2017_2.projectFeatures.VersionedSettings
 import jetbrains.buildServer.configs.kotlin.v2017_2.projectFeatures.versionedSettings
