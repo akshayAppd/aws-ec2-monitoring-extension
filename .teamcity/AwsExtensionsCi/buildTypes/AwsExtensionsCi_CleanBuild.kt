@@ -1,6 +1,6 @@
 package AwsExtensionsCi.buildTypes
 
-import jetbrains.buildServer.configs.kotlin.v2017_2.*
+import jetbrains.buildServer.configs.kotlin.v2017_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2017_2.buildSteps.maven
 
 object AwsExtensionsCi_CleanBuild : BuildType({

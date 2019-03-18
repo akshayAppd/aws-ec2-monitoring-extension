@@ -1,6 +1,7 @@
 package AwsExtensionsCi
 
-import jetbrains.buildServer.configs.kotlin.v2017_2.*
+import jetbrains.buildServer.configs.kotlin.v2017_2.project
+import jetbrains.buildServer.configs.kotlin.v2017_2.version
 
 /*
 The settings script is an entry point for defining a single

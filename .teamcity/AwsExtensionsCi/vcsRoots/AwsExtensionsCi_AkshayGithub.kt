@@ -1,6 +1,5 @@
 package AwsExtensionsCi.vcsRoots
 
-import jetbrains.buildServer.configs.kotlin.v2017_2.*
 import jetbrains.buildServer.configs.kotlin.v2017_2.vcs.GitVcsRoot
 
 object AwsExtensionsCi_AkshayGithub : GitVcsRoot({
