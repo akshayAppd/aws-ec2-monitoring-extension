@@ -10,7 +10,7 @@ import jetbrains.buildServer.configs.kotlin.v2018_2.projectFeatures.versionedSet
 
 object Project : Project({
     uuid = "15604d30-1c23-4a51-927f-293ea2b881a9"
-    id("AwsExtensionsCi")
+    id("AwsExtensionsCI")
     parentId("_Root")
     name = "AWS_Extensions_CI"
 
