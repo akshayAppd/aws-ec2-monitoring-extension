@@ -16,11 +16,11 @@ object Project : Project({
 
     vcsRoot(AwsExtensionsCi_AkshayGithub)
 
-    buildType(AwsExtensionsCi_CleanBuild)
-    buildType(AwsExtensionsCi_SetupInLinux)
-    buildType(AwsExtensionsCi_IntegrationTestInLinux)
-    buildType(AwsExtensionsCi_StopLinux)
-    buildType(AwsExtensionsCi_Publish)
+    buildType(AwsExtensionsCI_CleanBuild)
+    buildType(AwsExtensionsCI_SetupInLinux)
+    buildType(AwsExtensionsCI_IntegrationTestInLinux)
+    buildType(AwsExtensionsCI_StopLinux)
+    buildType(AwsExtensionsCI_Publish)
 
     params {
         password("env.APPDYNAMICS_AGENT_ACCOUNT_ACCESS_KEY", "credentialsJSON:9a2e4645-ba0b-4431-89a9-02f31f720a92", label = "Controller access key", readOnly = true)
@@ -37,7 +37,7 @@ object Project : Project({
             id = "PROJECT_EXT_2"
             mode = VersionedSettings.Mode.ENABLED
             buildSettingsMode = VersionedSettings.BuildSettingsMode.PREFER_SETTINGS_FROM_VCS
-            rootExtId = "${AwsExtensionsCi_AkshayGithub.id}"
+            rootExtId = "${AwsExtensionsCI_AkshayGithub.id}"
             showChanges = false
             settingsFormat = VersionedSettings.Format.KOTLIN
             storeSecureParamsOutsideOfVcs = true
@@ -45,10 +45,10 @@ object Project : Project({
     }
 
     buildTypesOrder = arrayListOf(
-            AwsExtensionsCi_CleanBuild,
-            AwsExtensionsCi_SetupInLinux,
-            AwsExtensionsCi_IntegrationTestInLinux,
-            AwsExtensionsCi_StopLinux,
-            AwsExtensionsCi_Publish
+            AwsExtensionsCI_CleanBuild,
+            AwsExtensionsCI_SetupInLinux,
+            AwsExtensionsCI_IntegrationTestInLinux,
+            AwsExtensionsCI_StopLinux,
+            AwsExtensionsCI_Publish
     )
 })
