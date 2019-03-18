@@ -14,7 +14,7 @@ object AwsExtensionsCi_SetupInLinux : BuildType({
     name = "Setup Linux Environment"
 
     vcs {
-        root(AwsExtensionsCi.vcsRoots.AwsExtensionsCi_AkshayGitHub)
+        root(AwsExtensionsCi.vcsRoots.AwsExtensionsCi_AkshayGithub)
 
     }
 

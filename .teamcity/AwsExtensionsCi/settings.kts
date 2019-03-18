@@ -1,6 +1,6 @@
 package AwsExtensionsCi
 
-import jetbrains.buildServer.configs.kotlin.v2018_2.*
+import jetbrains.buildServer.configs.kotlin.v2017_2.*
 
 /*
 The settings script is an entry point for defining a single
@@ -31,5 +31,5 @@ node (Plugins -> teamcity-configs -> teamcity-configs:generate),
 the 'Debug' option is available in the context menu for the task.
 */
 
-version = "2018.2"
+version = "2017.2"
 project(AwsExtensionsCi.Project)

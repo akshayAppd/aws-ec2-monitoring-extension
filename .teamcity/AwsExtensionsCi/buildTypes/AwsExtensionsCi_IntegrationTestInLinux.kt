@@ -13,9 +13,10 @@ object AwsExtensionsCi_IntegrationTestInLinux : BuildType({
     name = "IntegrationTest in Linux"
 
     vcs {
-        root(AwsExtensionsCi.vcsRoots.AwsExtensionsCi_AkshayGitHub)
+        root(AwsExtensionsCi.vcsRoots.AwsExtensionsCi_AkshayGithub)
 
     }
+
 
     steps {
         maven {

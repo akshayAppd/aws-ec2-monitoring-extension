@@ -13,7 +13,7 @@ object AwsExtensionsCi_StopLinux : BuildType({
     name = "Stop Linux docker"
 
     vcs {
-        root(AwsExtensionsCi.vcsRoots.AwsExtensionsCi_AkshayGitHub)
+        root(AwsExtensionsCi.vcsRoots.AwsExtensionsCi_AkshayGithub)
 
     }
 

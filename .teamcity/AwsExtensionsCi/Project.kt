@@ -3,15 +3,15 @@ package AwsExtensionsCi
 import AwsExtensionsCi.buildTypes.*
 import AwsExtensionsCi.vcsRoots.*
 import AwsExtensionsCi.vcsRoots.AwsExtensionsCi_AkshayGithub
-import jetbrains.buildServer.configs.kotlin.v2018_2.*
-import jetbrains.buildServer.configs.kotlin.v2018_2.Project
-import jetbrains.buildServer.configs.kotlin.v2018_2.projectFeatures.VersionedSettings
-import jetbrains.buildServer.configs.kotlin.v2018_2.projectFeatures.versionedSettings
+import jetbrains.buildServer.configs.kotlin.v2017_2.*
+import jetbrains.buildServer.configs.kotlin.v2017_2.Project
+import jetbrains.buildServer.configs.kotlin.v2017_2.projectFeatures.VersionedSettings
+import jetbrains.buildServer.configs.kotlin.v2017_2.projectFeatures.versionedSettings
 
 object Project : Project({
     uuid = "15604d30-1c23-4a51-927f-293ea2b881a9"
-    id("AwsExtensionsCi")
-    parentId("_Root")
+    id = "AwsExtensionsCi"
+    parentId = "_Root"
     name = "AWS_Extensions_Ci"
 
     vcsRoot(AwsExtensionsCi_AkshayGithub)
