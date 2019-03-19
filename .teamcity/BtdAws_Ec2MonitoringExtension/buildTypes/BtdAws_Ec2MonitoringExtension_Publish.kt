@@ -9,7 +9,7 @@ import jetbrains.buildServer.configs.kotlin.v2017_2.triggers.vcs
  */
 
 object BtdAws_Ec2MonitoringExtension_Publish : BuildType({
-    uuid = "3ff8f4b6-4a14-11e9-8646-d663bd873d93"
+    uuid = "101c9816-4a1d-11e9-afa8-d663bd873d93"
     id = "BtdAws_Ec2MonitoringExtension_Publish"
     name = "Publish build artifact"
 
