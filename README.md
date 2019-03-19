@@ -13,7 +13,7 @@ In order to use this extension, you do need a [Standalone JAVA Machine Agent](ht
 
 The extension needs to be able to connect to AWS Cloudwatch in order to collect and send metrics. To do this, you will have to either establish a remote connection in between the extension and the product, or have an agent on the same machine running the product in order for the extension to collect and send the metrics.
 
-
+  
 ## Installation
 
 1. Run 'mvn clean install' from aws-ec2-monitoring-extension
