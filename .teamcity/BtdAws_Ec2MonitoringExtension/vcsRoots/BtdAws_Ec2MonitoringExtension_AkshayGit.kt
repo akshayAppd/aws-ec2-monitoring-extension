@@ -1,7 +1,6 @@
 package BtdAws_Ec2MonitoringExtension.vcsRoots
 
-import jetbrains.buildServer.configs.kotlin.v2018_2.*
-import jetbrains.buildServer.configs.kotlin.v2018_2.vcs.GitVcsRoot
+import jetbrains.buildServer.configs.kotlin.v2017_2.vcs.GitVcsRoot
 
 object BtdAws_Ec2MonitoringExtension_AkshayGit : GitVcsRoot({
     uuid = "e3dbe10c-59c1-48c5-ab1a-2d71d611715b"
