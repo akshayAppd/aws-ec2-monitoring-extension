@@ -32,4 +32,12 @@ object Project : Project({
             storeSecureParamsOutsideOfVcs = true
         }
     }
+
+    buildTypesOrder = arrayListOf(
+            BtdAws_Ec2MonitoringExtension_CleanBuild,
+            BtdAws_Ec2MonitoringExtension_SetupInLinux,
+            BtdAws_Ec2MonitoringExtension_IntegrationTestInLinux,
+            BtdAws_Ec2MonitoringExtension_StopLinux,
+            BtdAws_Ec2MonitoringExtension_Publish
+    )
 })
