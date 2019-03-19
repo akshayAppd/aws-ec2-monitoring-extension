@@ -8,7 +8,7 @@ import jetbrains.buildServer.configs.kotlin.v2017_2.triggers.vcs
  * @author Akshay Srivastava
  */
 object BtdAws_Ec2MonitoringExtension_SetupInLinux : BuildType({
-    uuid = "e931478d-93ee-469b-9b33-edeb583e874e"
+    uuid = "3ff8f4b6-4a14-11e9-8646-d663bd873d93"
     id = "BtdAws_Ec2MonitoringExtension_SetupInLinux"
     name = "Setup Linux Environment"
 

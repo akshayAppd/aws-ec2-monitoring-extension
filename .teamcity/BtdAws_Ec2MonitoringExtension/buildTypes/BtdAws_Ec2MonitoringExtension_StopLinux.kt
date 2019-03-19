@@ -8,7 +8,7 @@ import jetbrains.buildServer.configs.kotlin.v2017_2.triggers.vcs
  * @author Akshay Srivastava
  */
 object BtdAws_Ec2MonitoringExtension_StopLinux : BuildType({
-    uuid = "e9cefadd-4c23-4fea-961c-f76b9af201e9"
+    uuid = "3ff8f4b6-4a14-11e9-8646-d663bd873d93"
     id = "BtdAws_Ec2MonitoringExtension_StopLinux"
     name = "Stop Linux docker"
 

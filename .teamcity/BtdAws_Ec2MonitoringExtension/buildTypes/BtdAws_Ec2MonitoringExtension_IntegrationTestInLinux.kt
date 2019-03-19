@@ -8,7 +8,7 @@ import jetbrains.buildServer.configs.kotlin.v2017_2.triggers.vcs
  * @author Akshay Srivastava
  */
 object BtdAws_Ec2MonitoringExtension_IntegrationTestInLinux : BuildType({
-    uuid = "0aa6257c-7671-4f9c-9ceb-cae9763d353d"
+    uuid = "37148194-4a14-11e9-8646-d663bd873d93"
     id = "BtdAws_Ec2MonitoringExtension_IntegrationTestInLinux"
     name = "IntegrationTest in Linux"
 

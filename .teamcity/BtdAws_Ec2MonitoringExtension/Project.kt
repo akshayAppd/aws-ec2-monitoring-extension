@@ -7,7 +7,7 @@ import jetbrains.buildServer.configs.kotlin.v2017_2.projectFeatures.VersionedSet
 import jetbrains.buildServer.configs.kotlin.v2017_2.projectFeatures.versionedSettings
 
 object Project : Project({
-    uuid = "96927f2b-7d1c-493c-8887-449c4eba657f"
+    uuid = "15440bfc-4a14-11e9-8646-d663bd873d93"
     id = "BtdAws_Ec2MonitoringExtension"
     parentId = "BtdAws"
     name = "EC2_Monitoring_Extension"

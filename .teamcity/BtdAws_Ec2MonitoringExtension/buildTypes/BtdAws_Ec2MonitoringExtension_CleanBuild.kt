@@ -4,7 +4,7 @@ import jetbrains.buildServer.configs.kotlin.v2017_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2017_2.buildSteps.maven
 
 object BtdAws_Ec2MonitoringExtension_CleanBuild : BuildType({
-    uuid = "61af96cf-8f4a-498e-ac76-a0ed419d1054"
+    uuid = "3190ec58-4a14-11e9-8646-d663bd873d93"
     name = "Clean Build"
 
     vcs {

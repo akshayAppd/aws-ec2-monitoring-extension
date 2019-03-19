@@ -3,7 +3,7 @@ package BtdAws_Ec2MonitoringExtension.vcsRoots
 import jetbrains.buildServer.configs.kotlin.v2017_2.vcs.GitVcsRoot
 
 object BtdAws_Ec2MonitoringExtension_AkshayGit : GitVcsRoot({
-    uuid = "e3dbe10c-59c1-48c5-ab1a-2d71d611715b"
+    uuid = "15440bfc-4a14-11e9-8646-d663bd873d93"
     name = "AkshayGit"
     url = "git@github.com:akshayAppd/aws-ec2-monitoring-extension-ci.git"
     authMethod = uploadedKey {
