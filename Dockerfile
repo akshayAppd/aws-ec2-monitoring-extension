@@ -6,7 +6,7 @@ RUN unzip terraform_0.11.11_linux_amd64.zip
 RUN mv terraform /usr/local/bin/
 
 ADD main.tf /usr/local/bin/terraform
-ADD variable.tf /usr/local/bin/terraform
+ADD variables.tf /usr/local/bin/terraform
 
 ADD target/AWSEC2Monitor-*.zip /opt/appdynamics/monitors
 
