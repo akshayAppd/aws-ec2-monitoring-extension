@@ -1,6 +1,6 @@
 FROM appdynamics/machine:4.5 AS MA
 
-RUN apt-get -y install wget unzip
+RUN apt-get install wget unzip
 RUN wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
 RUN unzip terraform_0.11.11_linux_amd64.zip
 RUN mv terraform /usr/local/bin/
