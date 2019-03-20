@@ -5,7 +5,7 @@ ADD target/AWSEC2Monitor-*.zip /opt/appdynamics/monitors
 RUN unzip -q "/opt/appdynamics/monitors/AWSEC2Monitor-*.zip" -d /opt/appdynamics/monitors
 RUN find /opt/appdynamics/monitors/ -name '*.zip' -delete
 
-RUN apt-get install wget unzip
+RUN apt-get install wget unzip -y
 RUN wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
 RUN unzip terraform_0.11.11_linux_amd64.zip
 RUN mv terraform /usr/local/bin/
