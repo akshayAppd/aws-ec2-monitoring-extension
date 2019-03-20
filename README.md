@@ -16,7 +16,7 @@ The extension needs to be able to connect to AWS Cloudwatch in order to collect 
 
 ## Installation
 
-1. Run 'mvn clean install' from aws-ec2-monitoring-extension 
+1. Run 'mvn clean install' from aws-ec2-monitoring-extension
 2. Copy and unzip AWSEC2Monitor-\<version\>.zip from 'target' directory into \<machine_agent_dir\>/monitors/
 3. Edit config.yml file in AWSEC2Monitor and provide the required configuration (see Configuration section)
 4. Restart the Machine Agent.
