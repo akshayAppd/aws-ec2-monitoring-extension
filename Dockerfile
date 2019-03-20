@@ -13,7 +13,6 @@ ADD target/AWSEC2Monitor-*.zip /opt/appdynamics/monitors
 RUN unzip -q "/opt/appdynamics/monitors/AWSEC2Monitor-*.zip" -d /opt/appdynamics/monitors
 RUN find /opt/appdynamics/monitors/ -name '*.zip' -delete
 
-
 RUN terraform init
 RUN terraform apply -auto-approve /usr/local/bin/terraform -var 'access_key=${AWS_ACCESS_KEY}' -var 'secret_key=${AWS_SECRET_KEY}'
 
