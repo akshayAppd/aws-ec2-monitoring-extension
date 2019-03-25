@@ -8,14 +8,13 @@ RUN mv terraform /usr/local/bin/
 ADD main.tf /usr/local/bin/terraform
 ADD variables.tf /usr/local/bin/terraform
 
+RUN terraform init
+RUN terraform apply -auto-approve /usr/local/bin/terraform -var 'access_key=${AWS_ACCESS_KEY}' -var 'secret_key=${AWS_SECRET_KEY}'
+
 ADD target/AWSEC2Monitor-*.zip /opt/appdynamics/monitors
 
 RUN unzip -q "/opt/appdynamics/monitors/AWSEC2Monitor-*.zip" -d /opt/appdynamics/monitors
 RUN find /opt/appdynamics/monitors/ -name '*.zip' -delete
-
-RUN terraform init
-RUN terraform apply -auto-approve /usr/local/bin/terraform -var 'access_key=${AWS_ACCESS_KEY}' -var 'secret_key=${AWS_SECRET_KEY}'
-
 #RUN output "instance_id" {
 #  value = "${element(aws_instance.aws_btd.*.id, 0)}"
 #}
