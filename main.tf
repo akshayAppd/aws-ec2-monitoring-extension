@@ -11,9 +11,5 @@ resource "aws_instance" "aws_btd" {
   
   #Security group
   security_groups = ["sg-ccb3ebb"]
-  
-  #Tags can be added as follows:
-  tags {
-    Name = "aws_btd_terraform"
-  }
+
 }
