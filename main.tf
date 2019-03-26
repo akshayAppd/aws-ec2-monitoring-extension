@@ -7,10 +7,10 @@ resource "aws_instance" "aws_btd" {
   instance_type = "t2.micro"
 
   #Reading the subnet_id from variables.tf
-  subnet_id = "${var.aws_btd_subnet}"
+  subnet_id = "subnet-3c3bbb75"
   
   #Security group
-  security_groups = ["${var.aws_btd_security_group}"]
+  security_groups = ["sg-ccb3ebb"]
   
   #Tags can be added as follows:
   tags {
