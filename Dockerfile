@@ -5,7 +5,7 @@ RUN wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linu
 RUN unzip terraform_0.11.11_linux_amd64.zip
 RUN mv terraform /usr/local/bin/
 
-ADD main.tf /usr/local/bin/terraform
+ADD main.tf /usr/local/bin
 
 RUN chmod +x /usr/local/bin/terraform
 
