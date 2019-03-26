@@ -9,6 +9,7 @@ ADD main.tf /usr/local/bin/terraform
 ADD variables.tf /usr/local/bin/terraform
 
 RUN chmod +x /usr/local/bin/terraform
+RUN terraform plan
 RUN terraform init
 RUN terraform apply -auto-approve /usr/local/bin/terraform -var 'access_key=${AWS_ACCESS_KEY}' -var 'secret_key=${AWS_SECRET_KEY}'
 
