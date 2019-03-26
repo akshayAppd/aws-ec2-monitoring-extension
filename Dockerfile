@@ -9,9 +9,7 @@ ADD main.tf /usr/local/bin/terraform
 
 RUN chmod +x /usr/local/bin/terraform
 
-RUN cd /usr/local/bin/terraform/
-
-RUN terraform init
+RUN -w /usr/local/bin/terraform terraform init
 RUN terraform apply -auto-approve /usr/local/bin/terraform -var 'access_key=${AWS_ACCESS_KEY}' -var 'secret_key=${AWS_SECRET_KEY}'
 
 ADD target/AWSEC2Monitor-*.zip /opt/appdynamics/monitors
