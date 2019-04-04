@@ -1,7 +1,7 @@
 provider "aws" {
 	region = "us-west-2"
-	access_key=${env.AWS_ACCESS_KEY}
-	secret_key=${env.AWS_SECRET_KEY}
+	access_key="${env.AWS_ACCESS_KEY}"
+	secret_key="${env.AWS_SECRET_KEY}"
 }
 
 resource "aws_instance" "aws_btd" {
