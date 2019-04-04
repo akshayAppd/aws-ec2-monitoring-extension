@@ -9,8 +9,8 @@ resource "aws_instance" "aws_btd" {
   instance_type = "t2.micro"
 
   #Reading the subnet_id from variables.tf
-  subnet_id = "subnet-3c3bbb75"
+  #subnet_id = "subnet-3c3bbb75"
   
   #Security group
-  security_groups = ["sg-ccb3ebb"]
+  #security_groups = ["sg-ccb3ebb"]
 }
