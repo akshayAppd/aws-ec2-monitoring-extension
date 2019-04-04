@@ -13,7 +13,7 @@ WORKDIR /usr/local/bin/
 RUN terraform init
 #RUN export AWS_ACCESS_KEY_ID="${env.AWS_ACCESS_KEY}"
 #RUN export AWS_SECRET_KEY="${env.AWS_SECRET_KEY}"
-RUN terraform apply -auto-approve -var 'access_key=${env.AWS_ACCESS_KEY}' -var 'secret_key=${env.AWS_SECRET_KEY}'
+RUN terraform apply -auto-approve
 
 
 ADD target/AWSEC2Monitor-*.zip /opt/appdynamics/monitors
