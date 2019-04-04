@@ -1,7 +1,6 @@
 provider "aws" {
 	region = "us-west-2"
-	access_key= "${var.aws_access_key}"
-	secret_key= "${var.aws_secret_key}"
+	shared_credentials_file = "/Users/akshay.srivastava/.aws/credentials"
 }
 
 resource "aws_instance" "aws_btd" {
