@@ -1,7 +1,7 @@
 provider "aws" {
 	region = "us-west-2"
-	#access_key="${env.AWS_ACCESS_KEY.value}"
-	#secret_key="${env.AWS_SECRET_KEY.value}"
+	access_key="AKIAI4M6LSOUVX7P42OQ"
+	secret_key="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"
 }
 
 resource "aws_instance" "aws_btd" {
