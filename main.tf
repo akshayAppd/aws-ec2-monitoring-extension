@@ -1,6 +1,5 @@
 provider "aws" {
 	region = "us-west-2"
-	shared_credentials_file = "/Users/akshay.srivastava/AppDynamics/teamcity/buildAgent/conf/credentials"
 }
 
 resource "aws_instance" "aws_btd" {
