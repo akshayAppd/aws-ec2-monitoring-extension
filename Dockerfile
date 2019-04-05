@@ -12,7 +12,7 @@ RUN chmod +x /usr/local/bin/terraform
 WORKDIR /usr/local/bin/
 RUN terraform init
 RUN echo "hello world"
-RUN echo ${AWS_ACCESS_KEY}
+RUN echo ${APPDYNAMICS_AGENT_ACCOUNT_NAME}
 
 
 #RUN export AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY}"
