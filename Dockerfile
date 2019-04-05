@@ -17,12 +17,12 @@ RUN echo ${APPDYNAMICS_AGENT_ACCOUNT_NAME}
 
 #RUN export AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY}"
 #RUN export AWS_SECRET_ACCESS_KEY="${AWS_SECRET_KEY}"
-RUN export AWS_DEFAULT_REGION="us-west-2"
+#RUN export AWS_DEFAULT_REGION="us-west-2"
 
 #RUN echo AWS_ACCESS_KEY_ID
 
 RUN terraform plan
-RUN terraform apply -auto-approve -var='aws_access_key=${AWS_ACCESS_KEY}' -var='aws_secret_key=${AWS_SECRET_KEY}'
+RUN terraform apply -auto-approve
 
 ADD target/AWSEC2Monitor-*.zip /opt/appdynamics/monitors
 
