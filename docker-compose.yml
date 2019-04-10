@@ -15,6 +15,9 @@ services:
      - EC2_INSTANCE_NAME=aws_btd_terraform
     build:
       context: .
+      args:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
       dockerfile: Dockerfile
     volumes:
       - /:/hostroot:ro
