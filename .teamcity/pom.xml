@@ -22,7 +22,7 @@
     </repository>
     <repository>
       <id>teamcity-server</id>
-      <url>http://localhost:8111/app/dsl-plugins-repository</url>
+      <url>http://teamc-publi-1cq8tafqryaxu-1482163451.eu-central-1.elb.amazonaws.com/app/dsl-plugins-repository</url>
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
