@@ -1,11 +1,11 @@
 FROM appdynamics/machine:4.5 AS MA
 
-ARG AWS_ACCESS_KEY_ID
-ARG AWS_SECRET_ACCESS_KEY
+#ARG AWS_ACCESS_KEY_ID
+#ARG AWS_SECRET_ACCESS_KEY
 
-RUN export TF_VAR_aws_access_key=$AWS_ACCESS_KEY_ID
-RUN export TF_VAR_aws_secret_key=$AWS_SECRET_ACCESS_KEY
-RUN export TF_VAR_region="us-west-2"
+#RUN export TF_VAR_aws_access_key=$AWS_ACCESS_KEY_ID
+#RUN export TF_VAR_aws_secret_key=$AWS_SECRET_ACCESS_KEY
+#RUN export TF_VAR_region="us-west-2"
 
 RUN apt-get -y install wget unzip
 RUN wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
