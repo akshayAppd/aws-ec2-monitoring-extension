@@ -15,5 +15,5 @@ resource "aws_instance" "aws_btd" {
   subnet_id = "subnet-3c3bbb75"
   
   #Security group
-  security_groups = ["sg-ccb3ebb"]
+  security_groups = ["sg-0a15a568fbcd99f41"]
 }
