@@ -1,4 +1,4 @@
-FROM appdynamics/machine:4.5 AS MA
+#FROM appdynamics/machine:4.5 AS MA
 
 #ARG AWS_ACCESS_KEY_ID
 #ARG AWS_SECRET_ACCESS_KEY
