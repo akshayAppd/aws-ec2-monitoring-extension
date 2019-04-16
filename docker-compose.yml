@@ -9,12 +9,15 @@ services:
      - APPDYNAMICS_CONTROLLER_HOST_NAME
      - APPDYNAMICS_CONTROLLER_SSL_ENABLED
      - APPDYNAMICS_CONTROLLER_PORT
-     - MACHINE_AGENT_PROPERTIES=-Dappdynamics.sim.enabled=true -Dappdynamics.docker.enabled=true
+     #- MACHINE_AGENT_PROPERTIES=-Dappdynamics.sim.enabled=true -Dappdynamics.docker.enabled=true
      - AWS_ACCESS_KEY_ID
      - AWS_SECRET_ACCESS_KEY
      - EC2_INSTANCE_NAME=aws_btd_terraform
     build:
       context: .
+      args:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
       dockerfile: Dockerfile
     volumes:
       - /:/hostroot:ro
