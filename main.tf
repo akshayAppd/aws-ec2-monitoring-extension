@@ -13,7 +13,7 @@ resource "aws_instance" "aws_btd" {
   iam_instance_profile = "arn:aws:ec2:eu-central-1::instance/*"
 
   #Reading the subnet_id from variables.tf
-  subnet_id = "subnet-3c3bbb75"
+  #subnet_id = "subnet-3c3bbb75"
   
   #Security group
   security_groups = ["sg-0a15a568fbcd99f41"]
