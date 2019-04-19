@@ -11,7 +11,6 @@ resource "aws_instance" "aws_btd" {
   ami = "ami-09def150731bdbcc2"
   instance_type = "t2.micro"
   iam_instance_profile = "extensions-teamcity-artifact-storage-role"
-  availability_zone = "eu-central-1a"
 
   #Reading the subnet_id from variables.tf
   #subnet_id = "subnet-3c3bbb75"
