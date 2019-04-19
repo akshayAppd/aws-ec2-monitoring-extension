@@ -10,7 +10,7 @@ provider "aws" {
 resource "aws_instance" "aws_btd" {
   ami = "ami-09def150731bdbcc2"
   instance_type = "t2.micro"
-  iam_instance_profile = "arn:aws:iam::663982073101:role/extensions-teamcity-artifact-storage-role"
+  iam_instance_profile = "extensions-teamcity-artifact-storage-role"
 
   #Reading the subnet_id from variables.tf
   #subnet_id = "subnet-3c3bbb75"
