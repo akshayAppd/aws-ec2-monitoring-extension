@@ -8,7 +8,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "aws_btd" {
-  ami = "ami-061392db613a6357b"
+  ami = "ami-09def150731bdbcc2"
   instance_type = "t2.micro"
   iam_instance_profile = "arn:aws:ec2:eu-central-1::instance/*"
 
