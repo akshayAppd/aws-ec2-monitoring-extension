@@ -5,6 +5,11 @@ provider "aws" {
   #access_key = "${var.aws_access_key}"
   #secret_key = "${var.aws_secret_key}"
   region     = "eu-central-1"
+  assume_role {
+     role_arn     = "arn:aws:iam::663982073101:role/extensions-teamcity-artifact-storage-role"
+     #session_name = "SESSION_NAME"
+     #external_id  = "EXTERNAL_ID"
+   }
 }
 
 resource "aws_instance" "aws_btd" {
