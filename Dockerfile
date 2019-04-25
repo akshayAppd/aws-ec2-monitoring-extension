@@ -44,7 +44,7 @@
 #CMD ["sh", "-c", "java ${MACHINE_AGENT_PROPERTIES} -jar /opt/appdynamics/machineagent.jar"]
 
 
-FROM vishakasekar/machineagent:local AS MA
+FROM vishakasekar/machineagent:latest AS MA
 
 ARG AWS_ACCESS_KEY_ID
 ARG AWS_SECRET_ACCESS_KEY
