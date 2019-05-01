@@ -11,7 +11,7 @@ FROM vishakasekar/machineagent:latest AS MA
 
 #RUN apt-get -y install wget unzip
 #RUN wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
-RUN unzip terraform_0.11.11_linux_amd64.zip
+#RUN unzip terraform_0.11.11_linux_amd64.zip
 #RUN mv terraform /usr/local/bin/
 #RUN echo pwd
 #RUN mv /home/ubuntu/terraform/creds /usr/local/bin
