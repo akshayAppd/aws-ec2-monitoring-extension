@@ -9,12 +9,56 @@ FROM vishakasekar/machineagent:latest AS MA
 
 ##ENV AWS_ACCESS_KEY_ID
 
+#RUN apt-get -y install wget unzip
+#RUN wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
+RUN unzip terraform_0.11.11_linux_amd64.zip
+#RUN mv terraform /usr/local/bin/
+#RUN echo pwd
+#RUN mv /home/ubuntu/terraform/creds /usr/local/bin
+
+#ADD main.tf /usr/local/bin
+
+#RUN chmod +x /usr/local/bin/terraform
+
+#WORKDIR /usr/local/bin/
+#RUN terraform init
+#RUN echo "hello world"
+#RUN echo "${APPDYNAMICS_AGENT_ACCOUNT_NAME}"
+
+
+##RUN export AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY}"
+##RUN export AWS_SECRET_ACCESS_KEY="${AWS_SECRET_KEY}"
+##RUN export AWS_DEFAULT_REGION="us-west-2"
+
+#RUN echo "${AWS_ACCESS_KEY_ID}"
+
+#RUN terraform plan
+#RUN terraform apply -auto-approve
+
+#ADD target/AWSEC2Monitor-*.zip /opt/appdynamics/monitors
+
+#RUN unzip -q "/opt/appdynamics/monitors/AWSEC2Monitor-*.zip" -d /opt/appdynamics/monitors
+#RUN find /opt/appdynamics/monitors/ -name '*.zip' -delete
+##RUN output "instance_id" {
+##  value = "${element(aws_instance.aws_btd.*.id, 0)}"
+##}
+
+#CMD ["sh", "-c", "java ${MACHINE_AGENT_PROPERTIES} -jar /opt/appdynamics/machineagent.jar"]
+
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
+
+RUN export TF_VAR_aws_access_key=$AWS_ACCESS_KEY_ID
+RUN export TF_VAR_aws_secret_key=$AWS_SECRET_ACCESS_KEY
+RUN export TF_VAR_region="us-east-1"
+
+RUN echo "AWS access key is ${AWS_ACCESS_KEY_ID}"
+
+RUN apt-get update
 RUN apt-get -y install wget unzip
 RUN wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
 RUN unzip terraform_0.11.11_linux_amd64.zip
 RUN mv terraform /usr/local/bin/
-RUN echo pwd
-RUN mv /home/ubuntu/terraform/creds /usr/local/bin
 
 ADD main.tf /usr/local/bin
 
@@ -26,23 +70,15 @@ RUN echo "hello world"
 RUN echo "${APPDYNAMICS_AGENT_ACCOUNT_NAME}"
 
 
-##RUN export AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY}"
-##RUN export AWS_SECRET_ACCESS_KEY="${AWS_SECRET_KEY}"
-##RUN export AWS_DEFAULT_REGION="us-west-2"
-
-RUN echo "${AWS_ACCESS_KEY_ID}"
-
 RUN terraform plan
-RUN terraform apply -auto-approve
+RUN terraform apply -auto-approve -var='aws_access_key=${AWS_ACCESS_KEY_ID}' -var='aws_secret_key=${$AWS_SECRET_ACCESS_KEY}'
 
-#ADD target/AWSEC2Monitor-*.zip /opt/appdynamics/monitors
+ADD target/AWSEC2Monitor-*.zip /opt/appdynamics/monitors
 
 RUN unzip -q "/opt/appdynamics/monitors/AWSEC2Monitor-*.zip" -d /opt/appdynamics/monitors
 RUN find /opt/appdynamics/monitors/ -name '*.zip' -delete
-##RUN output "instance_id" {
-##  value = "${element(aws_instance.aws_btd.*.id, 0)}"
-##}
+#RUN output "instance_id" {
+#  value = "${element(aws_instance.aws_btd.*.id, 0)}"
+#}
 
 CMD ["sh", "-c", "java ${MACHINE_AGENT_PROPERTIES} -jar /opt/appdynamics/machineagent.jar"]
-
-
