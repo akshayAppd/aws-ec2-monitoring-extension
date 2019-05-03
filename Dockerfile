@@ -65,7 +65,7 @@ RUN mv terraform /usr/local/bin/
 
 
 WORKDIR /home/ubuntu/terraform
-RUN mv ./creds /usr/local/bin
+COPY ./creds /usr/local/bin
 
 
 WORKDIR /usr/local/bin/
