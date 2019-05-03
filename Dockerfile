@@ -31,6 +31,7 @@ RUN echo "${APPDYNAMICS_AGENT_ACCOUNT_NAME}"
 #RUN export AWS_DEFAULT_REGION="us-west-2"
 
 RUN echo "${AWS_ACCESS_KEY_ID}"
+RUN echo "${AWS_SECRET_ACCESS_KEY}"
 
 RUN terraform plan
 RUN terraform apply -auto-approve
