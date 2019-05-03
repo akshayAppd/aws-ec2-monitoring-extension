@@ -1,11 +1,11 @@
 FROM vishakasekar/machineagent:latest AS MA
 
-#ARG AWS_ACCESS_KEY_ID
-#ARG AWS_SECRET_ACCESS_KEY
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
 
-#RUN export TF_VAR_aws_access_key=$AWS_ACCESS_KEY_ID
-#RUN export TF_VAR_aws_secret_key=$AWS_SECRET_ACCESS_KEY
-#RUN export TF_VAR_region="us-west-2"
+RUN export TF_VAR_aws_access_key=$AWS_ACCESS_KEY_ID
+RUN export TF_VAR_aws_secret_key=$AWS_SECRET_ACCESS_KEY
+RUN export TF_VAR_region="us-west-2"
 
 #ENV AWS_ACCESS_KEY_ID
 
@@ -21,6 +21,10 @@ ADD main.tf /usr/local/bin
 RUN chmod +x /usr/local/bin/terraform
 
 WORKDIR /usr/local/bin/
+
+RUN echo var.aws_access_key
+RUN echo "${var.aws_secret_key}"
+
 RUN terraform init
 RUN echo "hello world"
 RUN echo "${APPDYNAMICS_AGENT_ACCOUNT_NAME}"
