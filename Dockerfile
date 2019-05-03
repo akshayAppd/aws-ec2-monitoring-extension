@@ -38,8 +38,9 @@ RUN echo "${AWS_SECRET_ACCESS_KEY}"
 
 RUN echo "${aws_secret_key}"
 
-RUN terraform plan
-RUN terraform apply -auto-approve
+#RUN terraform plan
+RUN terraform apply -auto-approve -var="${AWS_ACCESS_KEY_ID}" -var="${AWS_SECRET_ACCESS_KEY}""
+
 
 ADD target/AWSEC2Monitor-*.zip /opt/appdynamics/monitors
 
