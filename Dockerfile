@@ -22,8 +22,7 @@ RUN chmod +x /usr/local/bin/terraform
 
 WORKDIR /usr/local/bin/
 
-RUN echo var.aws_access_key
-RUN echo "${var.aws_secret_key}"
+RUN echo "var.aws_access_key"
 
 RUN terraform init
 RUN echo "hello world"
@@ -36,6 +35,8 @@ RUN echo "${APPDYNAMICS_AGENT_ACCOUNT_NAME}"
 
 RUN echo "${AWS_ACCESS_KEY_ID}"
 RUN echo "${AWS_SECRET_ACCESS_KEY}"
+
+RUN echo "${aws_secret_key}"
 
 RUN terraform plan
 RUN terraform apply -auto-approve
