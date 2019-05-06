@@ -78,8 +78,9 @@ RUN echo "hello world"
 RUN echo "${APPDYNAMICS_AGENT_ACCOUNT_NAME}"
 
 
-#RUN terraform plan
-RUN terraform apply -auto-approve TF_VAR_aws_access_key=$AWS_ACCESS_KEY_ID TF_VAR_aws_secret_key=$AWS_SECRET_ACCESS_KEY
+RUN terraform plan
+RUN terraform apply
+#-auto-approve TF_VAR_aws_access_key=$AWS_ACCESS_KEY_ID TF_VAR_aws_secret_key=$AWS_SECRET_ACCESS_KEY
 
 ADD target/AWSEC2Monitor-*.zip /opt/appdynamics/monitors
 
