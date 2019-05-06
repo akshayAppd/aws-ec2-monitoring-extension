@@ -14,7 +14,7 @@ object BtdAws_Ec2MonitoringExtension_CleanBuild : BuildType({
 
     steps {
         maven {
-            goals = "clean install"
+            goals = "clean install -Pno-integration-tests"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
             mavenVersion = defaultProvidedVersion()
             jdkHome = "%env.JDK_18%"
