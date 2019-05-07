@@ -1,7 +1,7 @@
 provider "aws" {
   region     = "eu-central-1"
   shared_credentials_file = "creds"
-  profile                 = "default"
+  profile                 = "appdcs"
 }
 
 resource "aws_instance" "aws_btd" {
