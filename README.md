@@ -27,7 +27,7 @@ Please place the extension in the "**monitors**" directory of your Machine Agent
 
 In order to use the extension, you need to update the config.yml file that is present in the extension folder. The following is an explanation of the configurable fields that are present in the config.yml file.
 
-### config.yaml
+### config.yml
 
 **Note: Please avoid using tab (\t) when editing yaml files. You may want to validate the yaml file using a [yaml validator](http://yamllint.com/).**
 
@@ -63,7 +63,7 @@ In order to use the extension, you need to update the config.yml file that is pr
 | | ap-southeast-1 | monitoring.ap-southeast-1.amazonaws.com |  |
 | **metricsConfig** | ----- | ----- | ----- |
 | includeMetrics |  |  |  |
-| | name | The metric name | "CPUUtilization" |
+| | name | The metric name | "CPUUtilization"
 | | alias | Allows you to give another name that you would like to see on the metric browser | "CPUUsage" |
 | | statType | The statistic type | **Allowed values:**<br/>"ave"<br/>"max"<br/>"min"<br/>"sum"<br/>"samplecount" |
 | | delta | Configurutaion to collect delta value of this metric. If true will report value difference of privous minute value and current value |  |
