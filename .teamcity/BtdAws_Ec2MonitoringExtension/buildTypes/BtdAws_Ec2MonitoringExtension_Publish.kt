@@ -40,7 +40,7 @@ object BtdAws_Ec2MonitoringExtension_Publish : BuildType({
 
 
     artifactRules = """
-       target/ApacheMonitor-*.zip
+       target/AWSEC2Monitor-*.zip
     """.trimIndent()
 
 })

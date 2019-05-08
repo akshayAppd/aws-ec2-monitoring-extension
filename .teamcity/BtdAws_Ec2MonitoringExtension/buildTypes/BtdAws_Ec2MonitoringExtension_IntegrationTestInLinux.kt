@@ -1,6 +1,7 @@
 package AwsExtensionsCi.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2017_2.BuildType
+import jetbrains.buildServer.configs.kotlin.v2017_2.buildSteps.exec
 import jetbrains.buildServer.configs.kotlin.v2017_2.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.v2017_2.triggers.vcs
 
@@ -24,7 +25,12 @@ object BtdAws_Ec2MonitoringExtension_IntegrationTestInLinux : BuildType({
             mavenVersion = defaultProvidedVersion()
             jdkHome = "%env.JDK_18%"
         }
+        exec {
+            path = "make"
+            arguments = "terraform-destroy"
+        }
     }
+
 
     dependencies {
         dependency(BtdAws_Ec2MonitoringExtension_SetupInLinux) {
