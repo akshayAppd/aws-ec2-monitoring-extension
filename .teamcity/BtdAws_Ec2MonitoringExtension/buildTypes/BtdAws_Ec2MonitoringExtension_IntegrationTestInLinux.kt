@@ -27,7 +27,7 @@ object BtdAws_Ec2MonitoringExtension_IntegrationTestInLinux : BuildType({
         }
         exec {
             path = "make"
-            arguments = "terraform-destroy"
+            arguments = "terraformDestroy"
         }
     }
 
