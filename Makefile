@@ -16,5 +16,5 @@ sleep:
 	@echo Wait finished
 
 terraformDestroy:
-    @echo Destroying terraform
-    terraform destroy -auto-approve
+	@echo Destroying terraform
+	terraform destroy -auto-approve
