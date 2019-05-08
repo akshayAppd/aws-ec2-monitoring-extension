@@ -74,6 +74,7 @@ public class MetricCheckIT {
         }
     }
 
+    @Ignore
     @Test
     public void testHearBeatMetric() throws IOException {
 
@@ -118,6 +119,7 @@ public class MetricCheckIT {
 
     }
 
+    @Ignore
     @Test
     public void testUptimeMetric() throws IOException {
 
