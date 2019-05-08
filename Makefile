@@ -14,3 +14,7 @@ sleep:
 	@echo Waiting for 5 minutes to read the metrics
 	sleep 300
 	@echo Wait finished
+
+terraformDestroy:
+    @echo Destroying terraform
+    terraform destroy -auto-approve
