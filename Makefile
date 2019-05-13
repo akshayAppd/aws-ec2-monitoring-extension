@@ -17,4 +17,4 @@ sleep:
 
 terraformDestroy:
 	@echo Destroying terraform
-	terraform destroy -auto-approve
+	/usr/local/bin/terraform terraform destroy -auto-approve
