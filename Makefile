@@ -18,4 +18,4 @@ sleep:
 terraformDestroy:
 	@echo Destroying terraform
 	@echo $(PWD)
-	cd ../../../terraform 
+	cd ../../terraform; terraform destroy -auto-approve; @echo $(PWD)
