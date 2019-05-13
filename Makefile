@@ -17,4 +17,4 @@ sleep:
 
 terraformDestroy:
 	@echo Destroying terraform
-	@echo $(PWD); cd /usr/local/bin/terraform; terraform destroy -auto-approve
+	terraform plan; terraform destroy -auto-approve
