@@ -17,5 +17,4 @@ sleep:
 
 terraformDestroy:
 	@echo Destroying terraform
-	@echo $(CURDIR)
-	sudo terraform destroy -auto-approve; ${CURDIR}
+	sudo terraform destroy -auto-approve
