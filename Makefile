@@ -18,4 +18,4 @@ sleep:
 terraformDestroy:
 	@echo Destroying terraform
 	@echo $(CURDIR)
-	cd ../../../terraform; terraform destroy; ${CURDIR}
+	terraform destroy; ${CURDIR}
