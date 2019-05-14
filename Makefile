@@ -18,4 +18,4 @@ sleep:
 terraformDestroy:
 	@echo Destroying terraform
 	@echo $(CURDIR)
-	cd /usr/local/bin; chmod +x /usr/local/bin; terraform destroy; ${CURDIR}
+	sudo terraform destroy; ${CURDIR}
