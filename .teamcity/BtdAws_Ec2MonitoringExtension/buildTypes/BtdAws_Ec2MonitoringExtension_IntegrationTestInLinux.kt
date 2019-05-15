@@ -25,10 +25,6 @@ object BtdAws_Ec2MonitoringExtension_IntegrationTestInLinux : BuildType({
             mavenVersion = defaultProvidedVersion()
             jdkHome = "%env.JDK_18%"
         }
-        exec {
-            path = "make"
-            arguments = "terraformDestroy"
-        }
     }
 
 

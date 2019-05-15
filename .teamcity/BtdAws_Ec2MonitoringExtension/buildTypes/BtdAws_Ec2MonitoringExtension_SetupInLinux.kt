@@ -28,6 +28,11 @@ object BtdAws_Ec2MonitoringExtension_SetupInLinux : BuildType({
             path = "make"
             arguments = "sleep"
         }
+
+        exec {
+            path = "make"
+            arguments = "terraformDestroy"
+        }
     }
 
     dependencies {

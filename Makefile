@@ -12,7 +12,7 @@ dockerStop:
 
 sleep:
 	@echo Waiting for 5 minutes to read the metrics
-	sleep 300
+	sleep 60
 	@echo Wait finished
 
 terraformDestroy:
