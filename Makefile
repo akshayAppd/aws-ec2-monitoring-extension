@@ -17,4 +17,4 @@ sleep:
 
 terraformDestroy:
 	@echo Destroying terraform
-	sudo terraform destroy -auto-approve -target aws_instance.btd-ec2
+	sudo terraform destroy -auto-approve -target aws_instance.aws_btd
