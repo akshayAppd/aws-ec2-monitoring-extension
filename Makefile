@@ -14,7 +14,3 @@ sleep:
 	@echo Waiting for 5 minutes to read the metrics
 	sleep 60
 	@echo Wait finished
-
-terraformDestroy:
-	@echo Destroying terraform
-	sudo terraform destroy -auto-approve -target aws_instance.aws_btd
