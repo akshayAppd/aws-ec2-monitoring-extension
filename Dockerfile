@@ -34,4 +34,6 @@ RUN find /opt/appdynamics/monitors/ -name '*.zip' -delete
 
 CMD ["sh", "-c", "java ${MACHINE_AGENT_PROPERTIES} -jar /opt/appdynamics/machineagent.jar"]
 
+RUN sleep 300
+
 RUN terraform destroy -auto-approve -target aws_instance.aws_btd
