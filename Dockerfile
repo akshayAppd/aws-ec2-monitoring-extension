@@ -7,8 +7,8 @@ RUN unzip terraform_0.11.11_linux_amd64.zip
 RUN mv terraform /usr/local/bin/
 
 
-WORKDIR /home/ubuntu/terraform/
-COPY creds /usr/local/bin
+#WORKDIR /home/ubuntu/terraform
+#COPY ./creds /usr/local/bin
 
 
 WORKDIR /usr/local/bin/
