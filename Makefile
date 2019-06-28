@@ -22,6 +22,7 @@ terraformApply:
 	sudo wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
 	sudo unzip -o terraform_0.11.11_linux_amd64.zip
 	@echo Terraform downloaded
+	cd ..
 	mv main.tf ./terraform
 	terraform init
 	@echo Terraform initialised
