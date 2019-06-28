@@ -17,11 +17,12 @@ sleep:
 
 terraformApply:
 	@echo Download terraform
+	sudo mkdir terraform
+	cd terraform/
 	sudo wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
 	sudo unzip -o terraform_0.11.11_linux_amd64.zip
 	@echo Terraform downloaded
 	mv main.tf ./terraform
-	cd terraform/
 	terraform init
 	@echo Terraform initialised
 	terraform apply auto-approve access_key=${AWS_ACCESS_KEY_ID}  secret_key=${AWS_SECRET_ACCESS_KEY}
