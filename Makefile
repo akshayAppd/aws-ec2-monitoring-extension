@@ -28,6 +28,7 @@ terraformApply:
 	sudo mv main.tf ./terraform
 	#cd terraform/
 	sudo terraform/terraform init
+	sudo terraform/terraform plan
 	@echo Terraform initialised
 	sudo terraform/terraform apply auto-approve
 	@echo Terraform setup done
