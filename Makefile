@@ -20,7 +20,7 @@ terraformApply:
 	#sudo mkdir terraform
 	#cd terraform/
 	sudo wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip -P terraform
-	cd terraform/
+	cd ./terraform
 	ls
 	sudo unzip terraform_0.11.11_linux_amd64.zip
 	@echo Terraform downloaded
