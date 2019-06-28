@@ -1,6 +1,7 @@
 package BtdAws_Ec2MonitoringExtension
 
 import AwsExtensionsCi.buildTypes.*
+import BtdAws_Ec2MonitoringExtension.buildTypes.BtdAws_Ec2MonitoringExtension_SetupEC2
 import BtdAws_Ec2MonitoringExtension.vcsRoots.BtdAws_Ec2MonitoringExtension_AkshayGit
 import jetbrains.buildServer.configs.kotlin.v2017_2.Project
 import jetbrains.buildServer.configs.kotlin.v2017_2.projectFeatures.VersionedSettings
@@ -16,6 +17,7 @@ object Project : Project({
     vcsRoot(BtdAws_Ec2MonitoringExtension_AkshayGit)
 
     buildType(BtdAws_Ec2MonitoringExtension_CleanBuild)
+    buildType(BtdAws_Ec2MonitoringExtension_SetupEC2)
     buildType(BtdAws_Ec2MonitoringExtension_SetupInLinux)
     buildType(BtdAws_Ec2MonitoringExtension_IntegrationTestInLinux)
     buildType(BtdAws_Ec2MonitoringExtension_StopLinux)
@@ -35,6 +37,7 @@ object Project : Project({
 
     buildTypesOrder = arrayListOf(
             BtdAws_Ec2MonitoringExtension_CleanBuild,
+            BtdAws_Ec2MonitoringExtension_SetupEC2,
             BtdAws_Ec2MonitoringExtension_SetupInLinux,
             BtdAws_Ec2MonitoringExtension_IntegrationTestInLinux,
             BtdAws_Ec2MonitoringExtension_StopLinux,

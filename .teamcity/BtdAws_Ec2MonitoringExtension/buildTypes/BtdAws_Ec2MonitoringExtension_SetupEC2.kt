@@ -1,16 +1,15 @@
-package AwsExtensionsCi.buildTypes
+package BtdAws_Ec2MonitoringExtension.buildTypes
 
-import BtdAws_Ec2MonitoringExtension.buildTypes.BtdAws_Ec2MonitoringExtension_SetupEC2
+import AwsExtensionsCi.buildTypes.BtdAws_Ec2MonitoringExtension_CleanBuild
 import jetbrains.buildServer.configs.kotlin.v2017_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2017_2.buildSteps.exec
-import jetbrains.buildServer.configs.kotlin.v2017_2.triggers.vcs
 
 /**
  * @author Akshay Srivastava
  */
-object BtdAws_Ec2MonitoringExtension_SetupInLinux : BuildType({
-    uuid = "59c2fd02-4a1d-11e9-8646-d663bd873d93"
-    id = "BtdAws_Ec2MonitoringExtension_SetupInLinux"
+object BtdAws_Ec2MonitoringExtension_SetupEC2 : BuildType({
+    uuid = "03dc024c-cf75-45d9-980d-055705aff23b"
+    id = "BtdAws_Ec2MonitoringExtension_SetupEC2"
     name = "Setup Linux Environment"
 
     vcs {
@@ -21,7 +20,7 @@ object BtdAws_Ec2MonitoringExtension_SetupInLinux : BuildType({
     steps {
         exec {
             path = "make"
-            arguments = "dockerRun"
+            arguments = "terraformApply"
         }
 
         //Waits for 5 minutes to send metrics to the controller
@@ -29,15 +28,15 @@ object BtdAws_Ec2MonitoringExtension_SetupInLinux : BuildType({
     }
 
     dependencies {
-        dependency(BtdAws_Ec2MonitoringExtension_SetupEC2) {
+        dependency(BtdAws_Ec2MonitoringExtension_CleanBuild) {
             snapshot {
 
             }
         }
     }
 
-    triggers {
+    /*triggers {
         vcs {
         }
-    }
+    }*/
 })
