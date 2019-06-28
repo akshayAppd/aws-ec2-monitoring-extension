@@ -25,7 +25,7 @@ terraformApply:
 	sudo unzip terraform/terraform_0.11.11_linux_amd64.zip -d terraform
 	@echo Terraform downloaded
 	#cd ..
-	sudo mv main.tf ./terraform
+	#sudo mv main.tf ./terraform
 	#cd terraform/
 	sudo terraform/terraform init
 	sudo terraform/terraform plan
