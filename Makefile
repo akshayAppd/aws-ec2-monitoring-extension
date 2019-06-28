@@ -30,5 +30,5 @@ terraformApply:
 	sudo terraform/terraform init
 	sudo terraform/terraform plan
 	@echo Terraform initialised
-	sudo terraform/terraform apply auto-approve
+	sudo terraform/terraform apply auto-approve -var 'access_key=${AWS_ACCESS_KEY}' -var 'secret_key=${AWS_SECRET_KEY}'
 	@echo Terraform setup done
