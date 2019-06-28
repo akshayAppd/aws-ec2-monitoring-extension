@@ -17,8 +17,8 @@ sleep:
 
 terraformApply:
 	@echo Download terraform
-	wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
-	unzip -o terraform_0.11.11_linux_amd64.zip
+	sudo wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
+	sudo unzip -o terraform_0.11.11_linux_amd64.zip
 	@echo Terraform downloaded
 	mv main.tf ./terraform
 	cd terraform/
