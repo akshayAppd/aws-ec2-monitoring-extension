@@ -10,7 +10,7 @@ import jetbrains.buildServer.configs.kotlin.v2017_2.buildSteps.exec
 object BtdAws_Ec2MonitoringExtension_SetupEC2 : BuildType({
     uuid = "03dc024c-cf75-45d9-980d-055705aff23b"
     id = "BtdAws_Ec2MonitoringExtension_SetupEC2"
-    name = "Setup Linux Environment"
+    name = "Setup EC2 Environment"
 
     vcs {
         root(BtdAws_Ec2MonitoringExtension.vcsRoots.BtdAws_Ec2MonitoringExtension_AkshayGit)
