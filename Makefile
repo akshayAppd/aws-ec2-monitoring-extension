@@ -27,6 +27,7 @@ terraformApply:
 	#cd ..
 	#sudo mv main.tf ./terraform
 	#cd terraform/
+	echo access key ${AWS_ACCESS_KEY_ID}
 	sudo terraform/terraform init
 	sudo terraform/terraform plan
 	@echo Terraform initialised
