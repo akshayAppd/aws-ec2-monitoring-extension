@@ -31,5 +31,5 @@ terraformApply:
 	sudo terraform/terraform init
 	#sudo terraform/terraform plan
 	@echo Terraform initialised
-	cd terraform/ && export TF_VAR_AWS_ACCESS_KEY="${AWS_ACCESS_KEY_ID}" && export TF_VAR_AWS_SECRET_KEY="${AWS_SECRET_ACCESS_KEY}" && terraform apply -auto-approve
+	cd terraform/ && export TF_VAR_AWS_ACCESS_KEY="${AWS_ACCESS_KEY_ID}" && pwd && export TF_VAR_AWS_SECRET_KEY="${AWS_SECRET_ACCESS_KEY}" && ls && terraform apply -auto-approve
 	@echo Terraform setup done
