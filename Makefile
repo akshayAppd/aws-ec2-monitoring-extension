@@ -20,8 +20,8 @@ terraformApply:
 	#sudo mkdir terraform
 	#cd terraform/
 	sudo wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip -P terraform
-	#cd ./terraform
-	#ls
+	cd ./terraform
+	ls
 	sudo unzip terraform/terraform_0.11.11_linux_amd64.zip -d terraform
 	@echo Terraform downloaded
 	#cd ..
@@ -31,5 +31,5 @@ terraformApply:
 	sudo terraform/terraform init
 	#sudo terraform/terraform plan
 	@echo Terraform initialised
-	cd terraform/ && export TF_VAR_AWS_ACCESS_KEY="${AWS_ACCESS_KEY_ID}" && pwd && export TF_VAR_AWS_SECRET_KEY="${AWS_SECRET_ACCESS_KEY}" && ls && terraform apply -auto-approve
-	@echo Terraform setup done.
+	sudo TF_VAR_AWS_ACCESS_KEY="${AWS_ACCESS_KEY_ID}" TF_VAR_AWS_SECRET_KEY="${AWS_SECRET_ACCESS_KEY}"  terraform/terraform apply -auto-approve
+	@echo Terraform setup done
