@@ -26,7 +26,7 @@ import java.io.InputStreamReader;
 /**
  * @author Akshay Srivastava
  */
-
+@Ignore
 public class MetricCheckIT {
 
     private static final String USER_AGENT = "Mozilla/5.0";
