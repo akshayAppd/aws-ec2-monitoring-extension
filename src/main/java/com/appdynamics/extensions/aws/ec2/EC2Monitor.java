@@ -114,24 +114,4 @@ public class EC2Monitor extends SingleNamespaceCloudwatchMonitor<EC2Configuratio
                 config.getMetricsConfig().getIncludeMetrics(),
                 config.getEc2Instance());
     }
-
-    public static void main(String[] args) throws TaskExecutionException {
-
-
-        ConsoleAppender ca = new ConsoleAppender();
-        ca.setWriter(new OutputStreamWriter(System.out));
-        ca.setLayout(new PatternLayout("%-5p [%t]: %m%n"));
-        ca.setThreshold(Level.DEBUG);
-
-        EC2Monitor monitor = new EC2Monitor();
-
-
-        final Map<String, String> taskArgs = new HashMap<>();
-        taskArgs.put("config-file", "/Users/akshay.srivastava/AppDynamics/btd/aws-ec2-monitoring-extension-ci/src/main/resources/conf/config.yml");
-        //taskArgs.put("metric-file", "/Users/akshay.srivastava/AppDynamics/btd/aws-ec2-monitoring-extension-ci/src/main/resources/conf/metrics.xml");
-
-
-        monitor.execute(taskArgs, null);
-
-    }
 }
