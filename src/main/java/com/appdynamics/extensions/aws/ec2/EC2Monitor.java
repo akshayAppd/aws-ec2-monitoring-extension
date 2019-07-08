@@ -17,6 +17,9 @@ import com.appdynamics.extensions.aws.ec2.providers.EC2InstanceNameProvider;
 import com.appdynamics.extensions.aws.metric.processors.MetricsProcessor;
 import org.apache.log4j.Logger;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author Florencio Sarmiento
  */
@@ -53,8 +56,8 @@ public class EC2Monitor extends SingleNamespaceCloudwatchMonitor<EC2Configuratio
     }
 
     @Override
-    protected int getTaskCount() {
-        return 3;
+    protected List<Map<String, ?>> getServers() {
+        return null;
     }
 
     @Override
