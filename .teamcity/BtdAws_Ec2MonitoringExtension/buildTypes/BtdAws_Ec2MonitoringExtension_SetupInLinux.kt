@@ -25,6 +25,10 @@ object BtdAws_Ec2MonitoringExtension_SetupInLinux : BuildType({
         }
 
         //Waits for 5 minutes to send metrics to the controller
+        exec {
+            path = "make"
+            arguments = "sleep"
+        }
 
     }
 
