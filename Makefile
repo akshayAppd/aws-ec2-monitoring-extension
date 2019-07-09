@@ -8,7 +8,8 @@ dockerRun: ## Run MA in docker
 	@echo started container ##################%%%%%%%%%%%%%%%%%%%&&&&&&&&&&&&&&&&&&&&&&
 
 dockerStop:
-	#${DOCKER_STOP}
+    sudo TF_VAR_AWS_ACCESS_KEY="${AWS_ACCESS_KEY_ID}" TF_VAR_AWS_SECRET_KEY="${AWS_SECRET_ACCESS_KEY}"  terraform/terraform destroy -auto-approve
+	${DOCKER_STOP}
 
 sleep:
 	@echo Waiting for 5 minutes to read the metrics
