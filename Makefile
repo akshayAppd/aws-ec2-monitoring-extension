@@ -34,7 +34,7 @@ terraformApply:
 	sudo TF_VAR_AWS_ACCESS_KEY="${AWS_ACCESS_KEY_ID}" TF_VAR_AWS_SECRET_KEY="${AWS_SECRET_ACCESS_KEY}"  terraform/terraform apply -auto-approve
 	@echo Terraform setup done
 
-terraformApply:
+terraformDestroy:
 	@echo Destroy instance
 	sudo TF_VAR_AWS_ACCESS_KEY="${AWS_ACCESS_KEY_ID}" TF_VAR_AWS_SECRET_KEY="${AWS_SECRET_ACCESS_KEY}"  terraform/terraform destroy -auto-approve
 	@echo Instance destroyed
