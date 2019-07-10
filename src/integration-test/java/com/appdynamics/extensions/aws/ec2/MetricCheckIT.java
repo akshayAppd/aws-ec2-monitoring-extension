@@ -112,7 +112,7 @@ public class MetricCheckIT {
 
         Assert.assertEquals("Invalid metric name", "Custom Metrics|Amazon EC2|AWS API Calls", metricName);
 
-        Assert.assertEquals("Invalid metric value", 10, metricValue);
+        Assert.assertEquals("Invalid metric value", 1 < metricValue);
 
     }
 
