@@ -79,7 +79,7 @@ public class MetricCheckIT {
 
         UrlBuilder builder = UrlBuilder.builder();
         builder.host(CONTROLLER_HOST).port(CONTROLLER_PORT).ssl(Boolean.valueOf(CONTROLLER_SSL_ENABLED)).path("controller/rest/applications/Server%20&%20Infrastructure%20Monitoring/metric-data");
-        builder.query("metric-path", "Application%20Infrastructure%20Performance%7CRoot%7CCustom%20Metrics%7CAmazon%20EC2%7CAWS API Calls");
+        builder.query("metric-path", "Application%20Infrastructure%20Performance%7CRoot%7CCustom%20Metrics%7CAmazon%20EC2%7CAWS%7CAPI%7CCalls");
         builder.query("time-range-type", "BEFORE_NOW");
         builder.query("duration-in-mins", "60");
         builder.query("output", "JSON");
