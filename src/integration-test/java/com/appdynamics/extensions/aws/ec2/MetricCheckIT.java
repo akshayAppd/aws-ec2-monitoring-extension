@@ -110,9 +110,9 @@ public class MetricCheckIT {
         String metricName = jsonNode.get(0).get("metricName").getTextValue();
         int metricValue = jsonNode.get(0).get("metricValues").get(0).get("current").getIntValue();
 
-        Assert.assertEquals("Invalid metric name", "Custom Metrics|Amazon EC2|AWS API Calls", metricName);
+        Assert.assertEquals("Valid metric name", "Custom Metrics|Amazon EC2|AWS API Calls", metricName);
 
-        Assert.assertTrue("Invalid metric value", 1 > metricValue);
+        Assert.assertTrue("Invalid metric value", metricValue >= 0);
 
     }
 
@@ -153,9 +153,9 @@ public class MetricCheckIT {
         int metricValue = jsonNode.get(0).get("metricValues").get(0).get("current").getIntValue();
 
 
-        Assert.assertEquals("Invalid metric name", "Custom Metrics|Amazon EC2|AppD|us-west-2|Instance|btd-ec2|CPUUtilization", metricName);
+        Assert.assertEquals("Valid metric name", "Custom Metrics|Amazon EC2|AppD|us-west-2|Instance|btd-ec2|CPUUtilization", metricName);
 
-        Assert.assertTrue("Invalid metric value", 1 > metricValue);
+        Assert.assertTrue("Invalid metric value", metricValue >= 0);
 
     }
 
