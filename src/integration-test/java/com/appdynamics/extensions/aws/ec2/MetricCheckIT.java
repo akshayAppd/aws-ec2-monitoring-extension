@@ -74,14 +74,14 @@ public class MetricCheckIT {
     }
 
     @Test
-    public void testHearBeatMetric() throws IOException {
+    public void testAPICallsMetric() throws IOException {
 
 
         UrlBuilder builder = UrlBuilder.builder();
         builder.host(CONTROLLER_HOST).port(CONTROLLER_PORT).ssl(Boolean.valueOf(CONTROLLER_SSL_ENABLED)).path("controller/rest/applications/Server%20&%20Infrastructure%20Monitoring/metric-data");
         builder.query("metric-path", "Application%20Infrastructure%20Performance%7CRoot%7CCustom%20Metrics%7CAmazon%20EC2%7CAWS%7CAPI%7CCalls");
         builder.query("time-range-type", "BEFORE_NOW");
-        builder.query("duration-in-mins", "60");
+        builder.query("duration-in-mins", "1");
         builder.query("output", "JSON");
 
         CloseableHttpResponse httpResponse = sendGET(builder.build());
@@ -117,14 +117,14 @@ public class MetricCheckIT {
     }
 
     @Test
-    public void testUptimeMetric() throws IOException {
+    public void testCPUMetric() throws IOException {
 
 
         UrlBuilder builder = UrlBuilder.builder();
         builder.host(CONTROLLER_HOST).port(CONTROLLER_PORT).ssl(Boolean.valueOf(CONTROLLER_SSL_ENABLED)).path("controller/rest/applications/Server%20&%20Infrastructure%20Monitoring/metric-data");
         builder.query("metric-path", "Application%20Infrastructure%20Performance%7CRoot%7CCustom%20Metrics%7CAmazon%20EC2%7CAppD%7Cus-west-2%7CInstance%7Cbtd_ec2%7CCPUUtilization");
         builder.query("time-range-type", "BEFORE_NOW");
-        builder.query("duration-in-mins", "60");
+        builder.query("duration-in-mins", "1");
         builder.query("output", "JSON");
 
         CloseableHttpResponse httpResponse = sendGET(builder.build());
