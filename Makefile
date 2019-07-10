@@ -32,7 +32,7 @@ terraformApply:
 	#sudo terraform/terraform plan
 	@echo Terraform initialised
 	sudo TF_VAR_AWS_ACCESS_KEY="${AWS_ACCESS_KEY_ID}" TF_VAR_AWS_SECRET_KEY="${AWS_SECRET_ACCESS_KEY}"  terraform/terraform apply -auto-approve
-	@echo Terraform setup done
+	@echo Terraform setup done.
 
 terraformDestroy:
 	@echo Destroy instance
