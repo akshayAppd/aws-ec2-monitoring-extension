@@ -8,7 +8,7 @@ dockerRun: ## Run MA in docker
 	@echo started container ##################%%%%%%%%%%%%%%%%%%%&&&&&&&&&&&&&&&&&&&&&&
 
 dockerStop:
-	#${DOCKER_STOP}
+	${DOCKER_STOP}
 
 sleep:
 	@echo Waiting for 5 minutes to read the metrics

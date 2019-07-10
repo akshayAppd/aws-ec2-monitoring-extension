@@ -205,25 +205,34 @@
 					<tag>${project.artifactId}-${project.version}</tag>
 				</configuration>
 			</plugin>
-
-			<!--<plugin>
-				<groupId>com.appdynamics.maven.plugin</groupId>
-				<artifactId>yaml-validate-maven-plugin</artifactId>
-				<version>1.0</version>
-
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
 				<configuration>
-						<yamlPath>src/main/resources/conf/config.yml</yamlPath>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<tagNameFormat>@{project.version}</tagNameFormat>
+					<releaseProfiles>release</releaseProfiles>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>de.jutzig</groupId>
+				<artifactId>github-release-plugin</artifactId>
+				<version>1.1.1</version>
+				<configuration>
+					<description>Releasing AWSEC2Monitor-${project.version}</description>
+					<releaseName>AWSEC2Monitor-${project.version}</releaseName>
+					<tag>v${project.version}</tag>
 
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>-->
+					<fileSets>
+						<fileSet>
+							<directory>${project.build.directory}</directory>
+							<includes>
+								<include>AWSEC2Monitor-${project.version}.zip</include>
+							</includes>
+						</fileSet>
+					</fileSets>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
