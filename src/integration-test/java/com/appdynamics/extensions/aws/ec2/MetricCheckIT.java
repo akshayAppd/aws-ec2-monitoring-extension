@@ -26,7 +26,6 @@ import java.io.InputStreamReader;
 /**
  * @author Akshay Srivastava
  */
-@Ignore
 public class MetricCheckIT {
 
     private static final String USER_AGENT = "Mozilla/5.0";
@@ -80,7 +79,7 @@ public class MetricCheckIT {
 
         UrlBuilder builder = UrlBuilder.builder();
         builder.host(CONTROLLER_HOST).port(CONTROLLER_PORT).ssl(Boolean.valueOf(CONTROLLER_SSL_ENABLED)).path("controller/rest/applications/Server%20&%20Infrastructure%20Monitoring/metric-data");
-        builder.query("metric-path", "Application%20Infrastructure%20Performance%7CRoot%7CCustom%20Metrics%7CAmazon%20EC2%7CAppD%7CHeartBeat");
+        builder.query("metric-path", "Application%20Infrastructure%20Performance%7CRoot%7CCustom%20Metrics%7CAmazon%20EC2%7CAWS API Calls");
         builder.query("time-range-type", "BEFORE_NOW");
         builder.query("duration-in-mins", "60");
         builder.query("output", "JSON");
@@ -111,10 +110,9 @@ public class MetricCheckIT {
         String metricName = jsonNode.get(0).get("metricName").getTextValue();
         int metricValue = jsonNode.get(0).get("metricValues").get(0).get("current").getIntValue();
 
+        Assert.assertEquals("Invalid metric name", "Custom Metrics|Amazon EC2|AWS API Calls", metricName);
 
-        Assert.assertEquals("Invalid metric name", "Custom Metrics|Apache|Apache1|HeartBeat", metricName);
-
-        Assert.assertEquals("Invalid metric value", 1, metricValue);
+        Assert.assertEquals("Invalid metric value", 10, metricValue);
 
     }
 
@@ -124,7 +122,7 @@ public class MetricCheckIT {
 
         UrlBuilder builder = UrlBuilder.builder();
         builder.host(CONTROLLER_HOST).port(CONTROLLER_PORT).ssl(Boolean.valueOf(CONTROLLER_SSL_ENABLED)).path("controller/rest/applications/Server%20&%20Infrastructure%20Monitoring/metric-data");
-        builder.query("metric-path", "Application%20Infrastructure%20Performance%7CRoot%7CCustom%20Metrics%7CAmazon%20EC2%7CCloudWatch%7Cus-west-2%7CInstance%7Caws_btd_terraform%7CCPUUtilization");
+        builder.query("metric-path", "Application%20Infrastructure%20Performance%7CRoot%7CCustom%20Metrics%7CAmazon%20EC2%7CAppD%7Cus-west-2%7CInstance%7Cbtd_ec2%7CCPUUtilization");
         builder.query("time-range-type", "BEFORE_NOW");
         builder.query("duration-in-mins", "60");
         builder.query("output", "JSON");
@@ -147,7 +145,6 @@ public class MetricCheckIT {
         }
         reader.close();
 
-
         ObjectMapper mapper = new ObjectMapper();
 
         JsonNode jsonNode = mapper.readTree(response.toString());
@@ -156,9 +153,9 @@ public class MetricCheckIT {
         int metricValue = jsonNode.get(0).get("metricValues").get(0).get("current").getIntValue();
 
 
-        Assert.assertEquals("Invalid metric name", "Custom Metrics|Amazon EC2|CloudWatch|us-east-1|Instance|aws_btd_terraform|CPUUtilization", metricName);
+        Assert.assertEquals("Invalid metric name", "Custom Metrics|Amazon EC2|AppD|us-west-2|Instance|btd-ec2|CPUUtilization", metricName);
 
-        Assert.assertTrue("Invalid metric value", 1 < metricValue);
+        Assert.assertTrue("Invalid metric value", 1 > metricValue);
 
     }
 
