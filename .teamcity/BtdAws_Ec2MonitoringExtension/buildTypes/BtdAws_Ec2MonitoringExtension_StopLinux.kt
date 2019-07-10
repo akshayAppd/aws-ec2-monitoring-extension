@@ -22,10 +22,7 @@ object BtdAws_Ec2MonitoringExtension_StopLinux : BuildType({
             path = "make"
             arguments = "dockerStop"
         }
-        exec {
-            path = "make"
-            arguments = "terraformDestroy"
-        }
+
     }
 
     dependencies {
